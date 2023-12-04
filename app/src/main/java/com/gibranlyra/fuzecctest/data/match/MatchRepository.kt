@@ -1,28 +1,27 @@
 package com.gibranlyra.fuzecctest.data.match
 
-import com.gibranlyra.fuzecctest.data.entity.Match
-import com.gibranlyra.fuzecctest.data.entity.Result
+import androidx.paging.Pager
+import androidx.paging.PagingData
+import androidx.paging.map
+import com.gibranlyra.fuzecctest.data.di.MatchPager
+import com.gibranlyra.fuzecctest.domain.model.MatchData
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
-import java.io.IOException
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MatchRepository @Inject constructor(
-    private val matchDataSource: MatchDataSource
+    @MatchPager private val pager: Pager<Int, MatchData>
 ) {
 
-    fun getMatches(): Flow<Result<List<Match>>> =
-        flow {
-            try {
-                val matches = matchDataSource.getMatches()
-                emit(Result.Success(matches))
-            } catch (e: HttpException) {
-                emit(
-                    Result.Error(e.localizedMessage ?: "Unexpected error")
-                )
-            } catch (e: IOException) {
-                emit(Result.Error("No internet connection"))
+    private val matches = emptyMap<Int, MatchData>().toMutableMap()
+
+    fun getMatches(): Flow<PagingData<MatchData>> {
+        return pager.flow
+            .map { pagingData ->
+                pagingData.map { match ->
+                    matches[match.id] = match
+                    match
+                }
             }
-        }
+    }
 }

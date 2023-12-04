@@ -7,11 +7,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Tournament(
     @SerialName("begin_at")
-    val beginAt: String = "",
+    val beginAt: String? = "",
     @SerialName("detailed_stats")
     val detailedStats: Boolean = false,
     @SerialName("end_at")
-    val endAt: String = "",
+    val endAt: String? = "",
     @SerialName("has_bracket")
     val hasBracket: Boolean = false,
     @SerialName("id")
@@ -31,7 +31,7 @@ data class Tournament(
     @SerialName("slug")
     val slug: String = "",
     @SerialName("tier")
-    val tier: String = "",
+    val tier: String? = "",
     @SerialName("winner_id")
     val winnerId: String? = null,
     @SerialName("winner_type")

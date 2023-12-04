@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FuzeccTest</string>
+    <string name="back_button">Go back</string>
+
+    <!--Home-->
+    <string name="home_screen_title">Matches</string>
+    <string name="home_screen_error">Error loading home information.</string>
+    <string name="retry">Retry</string>
+    <string name="versus">vs</string>
 </resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="size_medium">24dp</dimen>
+    <dimen name="title_top_bar_image_banner_size">184dp</dimen>
+    <dimen name="large_match_image_width">200dp</dimen>
+</resources>

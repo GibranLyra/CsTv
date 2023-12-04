@@ -9,7 +9,7 @@ data class League(
     @SerialName("id")
     val id: Int = 0,
     @SerialName("image_url")
-    val imageUrl: String? = null,
+    val imageUrl: String? = "",
     @SerialName("modified_at")
     val modifiedAt: String = "",
     @SerialName("name")

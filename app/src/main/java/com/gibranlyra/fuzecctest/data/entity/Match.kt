@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Match(
     @SerialName("begin_at")
-    val beginAt: String = "",
+    val beginAt: String? = "",
     @SerialName("detailed_stats")
     val detailedStats: Boolean = false,
     @SerialName("draw")
@@ -39,7 +39,7 @@ data class Match(
     @SerialName("opponents")
     val opponents: List<Opponent> = listOf(),
     @SerialName("original_scheduled_at")
-    val originalScheduledAt: String = "",
+    val originalScheduledAt: String? = "",
     @SerialName("rescheduled")
     val rescheduled: Boolean = false,
     @SerialName("results")

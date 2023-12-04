@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Serie(
     @SerialName("begin_at")
-    val beginAt: String = "",
+    val beginAt: String? = "",
     @SerialName("end_at")
     val endAt: String? = null,
     @SerialName("full_name")
