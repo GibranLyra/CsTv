@@ -41,6 +41,7 @@ internal fun NavGraphBuilder.homeScreenComposable(
         HomeScreen(
             uiState = uiState,
             onRetryButtonClicked = homeViewModel::getMatches,
+            onRefreshMatches = homeViewModel::getMatches,
             onToolbarComposition = onToolbarComposition,
             onMatchClicked = {
                 // TODO

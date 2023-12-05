@@ -4,5 +4,5 @@ import com.gibranlyra.fuzecctest.data.entity.Match
 
 interface MatchDataSource {
 
-    suspend fun getMatches(pageSize: Int, pageNumber: Int): List<Match>
+    suspend fun getMatches(pageSize: Int, pageNumber: Int, filter: String): List<Match>
 }

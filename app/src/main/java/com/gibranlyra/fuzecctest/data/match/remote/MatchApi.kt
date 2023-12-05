@@ -11,6 +11,7 @@ internal interface MatchApi {
         @Query("page[size]") pageSize: Int,
         @Query("page[number]") pageNumber: Int,
         @Query("filter[begin_at]") beginAt: String,
+        @Query("filter[status]") status: String = "running,not_started,finished",
         @Query("sort") sort: String = "begin_at",
     ): List<Match>
 }

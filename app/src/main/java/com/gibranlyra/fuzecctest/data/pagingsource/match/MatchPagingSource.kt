@@ -3,21 +3,23 @@ package com.gibranlyra.fuzecctest.data.pagingsource.match
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.gibranlyra.fuzecctest.data.entity.MatchStatus
 import com.gibranlyra.fuzecctest.data.ext.toMatchData
 import com.gibranlyra.fuzecctest.data.match.MatchDataSource
 import com.gibranlyra.fuzecctest.domain.model.MatchData
-import org.threeten.bp.ZoneOffset
-import org.threeten.bp.ZonedDateTime
+import com.gibranlyra.fuzecctest.util.getCurrentDateTime
 import javax.inject.Inject
 
 private const val STARTING_PAGE =
-    2514 // FIXME When the correct sort and filter is done on the api we can revert it to 0
-private const val PAGE_SIZE = 20
+    1 // FIXME When the correct sort and filter is done on the api we can revert it to 0
+private const val PAGE_SIZE = 50
 
 private const val TAG: String = "MatchPagingSource"
 
 internal class MatchPagingSource @Inject constructor(private val matchDataSource: MatchDataSource) :
     PagingSource<Int, MatchData>() {
+
+    private var plusDays = 0L
 
     override fun getRefreshKey(state: PagingState<Int, MatchData>): Int? =
         state.anchorPosition?.let { anchorPosition ->
@@ -29,13 +31,22 @@ internal class MatchPagingSource @Inject constructor(private val matchDataSource
         return try {
             val pageNumber = params.key ?: STARTING_PAGE
 
-            val response = matchDataSource.getMatches(PAGE_SIZE, pageNumber)
-                .filter { match -> isInTheFuture(match.beginAt) }
+            val response =
+                matchDataSource.getMatches(PAGE_SIZE, pageNumber, getCurrentDateTime(plusDays))
+                    .asSequence()
+                    .sortedBy { match -> match.status.ordinal }
+                    .map { match -> match.toMatchData() }
+                    .toList()
+
+            val a = matchDataSource.getMatches(PAGE_SIZE, pageNumber, getCurrentDateTime(plusDays))
+                .sortedBy { it.status.ordinal }
+
+            val nextKey = getNextKey(response, pageNumber)
 
             LoadResult.Page(
-                data = response.map { match -> match.toMatchData() },
+                data = response,
                 prevKey = null,
-                nextKey = if (response.isEmpty()) null else pageNumber.plus(1),
+                nextKey = nextKey,
             )
 
         } catch (e: Exception) {
@@ -44,16 +55,10 @@ internal class MatchPagingSource @Inject constructor(private val matchDataSource
         }
     }
 
-    private fun isInTheFuture(beginAt: String?): Boolean {
-        return if (beginAt.isNullOrEmpty()) {
-            false
-        } else {
-            val currentUtcDateTime = ZonedDateTime.now(ZoneOffset.UTC)
-            val givenUtcDateTime = ZonedDateTime.parse(beginAt)
-
-            val isInTheFuture = !givenUtcDateTime.isBefore(currentUtcDateTime)
-            println("IsInTheFuture: $isInTheFuture")
-            isInTheFuture
+    private fun getNextKey(response: List<MatchData>, pageNumber: Int): Int {
+        if (response.isEmpty()) {
+            plusDays++
         }
+        return if (response.isEmpty()) STARTING_PAGE else pageNumber.plus(1)
     }
 }

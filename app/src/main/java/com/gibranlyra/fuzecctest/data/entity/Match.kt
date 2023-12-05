@@ -53,7 +53,7 @@ data class Match(
     @SerialName("slug")
     val slug: String = "",
     @SerialName("status")
-    val status: String = "",
+    val status: MatchStatus = MatchStatus.NOT_STARTED,
     @SerialName("streams_list")
     val streamsList: List<Stream> = listOf(),
     @SerialName("tournament")

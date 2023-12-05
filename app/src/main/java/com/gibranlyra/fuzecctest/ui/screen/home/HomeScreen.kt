@@ -1,14 +1,19 @@
 package com.gibranlyra.fuzecctest.ui.screen.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyGridScope
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -30,25 +35,49 @@ import kotlinx.coroutines.flow.flowOf
 import java.io.IOException
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun HomeScreen(
     uiState: HomeUiState,
     modifier: Modifier = Modifier,
     onToolbarComposition: (ToolbarData<Any>) -> Unit = { },
     onRetryButtonClicked: () -> Unit = {},
+    onRefreshMatches: () -> Unit = {},
     onMatchClicked: (MatchData) -> Unit = {},
 ) {
     onToolbarComposition(ToolbarData(stringResource(id = R.string.home_screen_title)))
 
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = uiState.isMatchRefreshing.isRefreshing,
+        onRefresh = { onRefreshMatches() }
+    )
+
+    Box(Modifier.pullRefresh(pullRefreshState)) {
+        MatchesList(modifier, uiState, onMatchClicked, onRetryButtonClicked)
+
+        PullRefreshIndicator(
+            uiState.isMatchRefreshing.isRefreshing,
+            pullRefreshState,
+            Modifier.align(Alignment.TopCenter)
+        )
+    }
+
+}
+
+@Composable
+private fun MatchesList(
+    modifier: Modifier,
+    uiState: HomeUiState,
+    onMatchClicked: (MatchData) -> Unit,
+    onRetryButtonClicked: () -> Unit
+) {
     val matches = uiState.matchesPagingState.collectAsLazyPagingItems()
 
-    LazyVerticalGrid(
+    LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = dimensionResource(R.dimen.padding_large)),
-        columns = GridCells.Adaptive(minSize = dimensionResource(id = R.dimen.large_match_image_width)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
         contentPadding = PaddingValues(vertical = dimensionResource(R.dimen.padding_large)),
     ) {
         items(
@@ -69,7 +98,7 @@ internal fun HomeScreen(
     }
 }
 
-private fun LazyGridScope.matchListItemHandler(
+private fun LazyListScope.matchListItemHandler(
     loadState: LoadState,
     onRetryButtonClicked: () -> Unit
 ) {

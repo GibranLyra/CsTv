@@ -7,4 +7,7 @@
     <string name="home_screen_error">Error loading home information.</string>
     <string name="retry">Retry</string>
     <string name="versus">vs</string>
+    <string name="live_match">LIVE!</string>
+    <string name="scheduled_match">Scheduled for: %s</string>
+    <string name="finished_match">Finished: %s</string>
 </resources>
