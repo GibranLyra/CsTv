@@ -3,7 +3,6 @@ package com.gibranlyra.fuzecctest.data.pagingsource.match
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.gibranlyra.fuzecctest.data.entity.MatchStatus
 import com.gibranlyra.fuzecctest.data.ext.toMatchData
 import com.gibranlyra.fuzecctest.data.match.MatchDataSource
 import com.gibranlyra.fuzecctest.domain.model.MatchData
@@ -37,9 +36,6 @@ internal class MatchPagingSource @Inject constructor(private val matchDataSource
                     .sortedBy { match -> match.status.ordinal }
                     .map { match -> match.toMatchData() }
                     .toList()
-
-            val a = matchDataSource.getMatches(PAGE_SIZE, pageNumber, getCurrentDateTime(plusDays))
-                .sortedBy { it.status.ordinal }
 
             val nextKey = getNextKey(response, pageNumber)
 
