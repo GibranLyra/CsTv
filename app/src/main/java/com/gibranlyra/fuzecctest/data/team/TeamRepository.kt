@@ -23,7 +23,6 @@ class TeamRepository @Inject constructor(private val teamDataSource: TeamDataSou
                             teams[team.id] = team
                             team.toTeamData()
                         }
-
                     emit(Result.Success(teamDataList))
                 }
             } catch (e: HttpException) {

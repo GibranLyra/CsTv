@@ -19,11 +19,12 @@ internal class MatchDetailsScreenTeamUseCase @Inject constructor(private val tea
                     Result.Loading -> Result.Loading
                     is Result.Success -> {
                         try {
-                            check(teamDataResult.data.size == 2) { "TeamDataResult should have two teams." }
                             Result.Success(
                                 MatchDetailsTeamsData(
-                                    teamDataResult.data.first(),
-                                    teamDataResult.data[1]
+                                    team1 = teamDataResult.data.find { teamData -> teamData.teamId == team1Id }
+                                        ?: throw IllegalStateException("TeamDataResult doesn't contains $team1Id"),
+                                    team2 = teamDataResult.data.find { teamData -> teamData.teamId == team2Id }
+                                        ?: throw IllegalStateException("TeamDataResult doesn't contains $team2Id"),
                                 )
                             )
                         } catch (e: IllegalStateException) {

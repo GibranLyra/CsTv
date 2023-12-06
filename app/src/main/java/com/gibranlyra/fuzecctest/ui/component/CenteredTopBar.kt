@@ -2,11 +2,11 @@ package com.gibranlyra.fuzecctest.ui.component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,19 +19,19 @@ import com.gibranlyra.fuzecctest.ui.theme.FuzeccTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SimpleTopBar(
+fun CenteredTopBar(
     title: String,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    TopAppBar(
+    CenterAlignedTopAppBar(
         modifier = modifier,
         title = {
             FuzeText(
                 modifier = Modifier,
                 text = title,
-                style = FuzeTextStyle.LARGE,
+                style = FuzeTextStyle.BASE,
                 styleOverride = TextStyle(color = MaterialTheme.colorScheme.onPrimary)
             )
         },
@@ -55,7 +55,7 @@ fun SimpleTopBar(
 
 @Preview(showBackground = true)
 @Composable
-fun SimpleTopBarPreview() {
+fun CenteredTopBarPreview() {
     FuzeccTheme {
         SimpleTopBar(
             title = "Simple TopBar",

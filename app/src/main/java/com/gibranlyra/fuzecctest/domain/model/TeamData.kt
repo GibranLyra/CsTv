@@ -8,5 +8,5 @@ data class TeamData(
     val teamId: Int,
     val name: String = "",
     val players: List<PlayerData>,
-    val imageUrl: String = ""
+    val teamImage: PandaImage = PandaImage(),
 ) : Parcelable

@@ -19,15 +19,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.gibranlyra.fuzecctest.R
 import com.gibranlyra.fuzecctest.domain.model.MatchData
 import com.gibranlyra.fuzecctest.domain.model.MatchDetailsTeamsData
+import com.gibranlyra.fuzecctest.domain.model.PandaImage
 import com.gibranlyra.fuzecctest.domain.model.PlayerData
 import com.gibranlyra.fuzecctest.domain.model.State
 import com.gibranlyra.fuzecctest.domain.model.TeamData
@@ -127,7 +129,7 @@ private fun PlayersPanelView(
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
         ) {
             Column(
@@ -150,12 +152,15 @@ private fun PlayersPanelView(
 }
 
 @Composable
-private fun PlayerViewLeft(player: PlayerData, modifier: Modifier = Modifier) {
+private fun PlayerViewLeft(
+    player: PlayerData,
+    modifier: Modifier = Modifier
+) {
     val roundedCorner = RoundedCornerShape(dimensionResource(R.dimen.padding_large))
 
     Column(
         modifier = modifier
-            .height(106.dp)
+            .height(dimensionResource(id = R.dimen.player_container_height))
             .fillMaxWidth()
             .padding(vertical = dimensionResource(id = R.dimen.padding_medium))
             .clip(roundedCorner)
@@ -163,10 +168,11 @@ private fun PlayerViewLeft(player: PlayerData, modifier: Modifier = Modifier) {
     ) {
         Row(
             modifier = Modifier
-                .padding(bottom = dimensionResource(id = R.dimen.padding_large))
+                .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
         ) {
             Column(
                 modifier = Modifier
+                    .fillMaxHeight()
                     .weight(1f),
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Bottom
@@ -175,36 +181,35 @@ private fun PlayerViewLeft(player: PlayerData, modifier: Modifier = Modifier) {
                     text = player.nickName,
                     textAlign = TextAlign.End,
                     overflow = TextOverflow.Ellipsis,
-                    style = FuzeTextStyle.SMALL
+                    style = FuzeTextStyle.SMALL,
+                    maxLines = 2,
                 )
                 FuzeText(
                     text = player.name,
                     textAlign = TextAlign.End,
                     overflow = TextOverflow.Ellipsis,
-                    style = FuzeTextStyle.X_SMALL_SUBTLE
+                    style = FuzeTextStyle.SMALL_SUBTLE,
+                    styleOverride = TextStyle(color = MaterialTheme.colorScheme.onTertiary),
                 )
             }
 
             Spacer(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)))
 
-            FuzeAsyncImage(
-                modifier = Modifier
-                    .clip(roundedCorner)
-                    .fillMaxHeight()
-                    .width(66.dp),
-                imageUrl = player.imageUrl,
-            )
+            PlayerImage(roundedCorner, player)
         }
     }
 }
 
 @Composable
-private fun PlayerViewRight(player: PlayerData, modifier: Modifier = Modifier) {
+private fun PlayerViewRight(
+    player: PlayerData,
+    modifier: Modifier = Modifier
+) {
     val roundedCorner = RoundedCornerShape(dimensionResource(R.dimen.padding_large))
 
     Column(
         modifier = modifier
-            .height(106.dp)
+            .height(dimensionResource(id = R.dimen.player_container_height))
             .fillMaxWidth()
             .padding(vertical = dimensionResource(id = R.dimen.padding_medium))
             .clip(roundedCorner)
@@ -212,20 +217,15 @@ private fun PlayerViewRight(player: PlayerData, modifier: Modifier = Modifier) {
     ) {
         Row(
             modifier = Modifier
-                .padding(bottom = dimensionResource(id = R.dimen.padding_large))
+                .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
         ) {
-            FuzeAsyncImage(
-                modifier = Modifier
-                    .clip(roundedCorner)
-                    .fillMaxHeight()
-                    .width(66.dp),
-                imageUrl = player.imageUrl,
-            )
+            PlayerImage(roundedCorner = roundedCorner, player = player)
 
             Spacer(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)))
 
             Column(
                 modifier = Modifier
+                    .fillMaxHeight()
                     .weight(1f),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Bottom
@@ -240,11 +240,29 @@ private fun PlayerViewRight(player: PlayerData, modifier: Modifier = Modifier) {
                     text = player.name,
                     textAlign = TextAlign.Start,
                     overflow = TextOverflow.Ellipsis,
-                    style = FuzeTextStyle.X_SMALL_SUBTLE
+                    style = FuzeTextStyle.SMALL_SUBTLE,
+                    styleOverride = TextStyle(color = MaterialTheme.colorScheme.onTertiary),
+                    maxLines = 2,
                 )
             }
         }
     }
+}
+
+@Composable
+private fun PlayerImage(
+    roundedCorner: RoundedCornerShape,
+    player: PlayerData
+) {
+    FuzeAsyncImage(
+        modifier = Modifier
+            .clip(roundedCorner)
+            .fillMaxHeight()
+            .background(MaterialTheme.colorScheme.tertiary)
+            .width(dimensionResource(id = R.dimen.player_image_width)),
+        contentScale = ContentScale.Crop,
+        imageUrl = player.playerImage.getImage(PandaImage.ImageType.THUMBNAIL),
+    )
 }
 
 @Composable
@@ -289,7 +307,7 @@ private fun MatchDetailsScreenLoadingPreview() {
 
 @Preview(showBackground = true)
 @Composable
-private fun MatchDetabilsScreenErrorPreview() {
+private fun MatchDetailsScreenErrorPreview() {
     FuzeccTheme {
         MatchDetailsScreen(
             uiState = MatchDetailsUiState(
@@ -302,12 +320,12 @@ private fun MatchDetabilsScreenErrorPreview() {
 
 
 internal fun stubMatchDetailsTeamsData(): MatchDetailsTeamsData {
-    return MatchDetailsTeamsData(team1 = stubTeamData(1), team2 = stubTeamData(2))
+    return MatchDetailsTeamsData(team1 = stubTeamData(1), team2 = stubTeamData(2, 5))
 }
 
-internal fun stubTeamData(id: Int) =
-    TeamData(teamId = id, name = "Team Name $id", stubPlayersDataList(10))
+internal fun stubTeamData(id: Int, size: Int = 10) =
+    TeamData(teamId = id, name = "Team Name $id", stubPlayersDataList(size))
 
 internal fun stubPlayersDataList(size: Int) = List(size) { index -> stubPlayerData(index) }
 internal fun stubPlayerData(id: Int) =
-    PlayerData(playerId = id, nickName = "Player NickName $id", name = "Player $id")
+    PlayerData(playerId = id, nickName = "NickName $id", name = "PlayerName PlayerLastName $id")

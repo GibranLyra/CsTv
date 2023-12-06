@@ -45,7 +45,7 @@ internal enum class FuzeTextStyle {
 internal fun FuzeTextStyle.toTextStyle(): TextStyle =
     when (this) {
         FuzeTextStyle.LARGE -> TextStyle(
-            fontSize = 24.sp,
+            fontSize = 28.sp,
             fontWeight = FontWeight.W700,
             lineHeight = 32.sp,
             color = MaterialTheme.colorScheme.onPrimary
@@ -73,7 +73,7 @@ internal fun FuzeTextStyle.toTextStyle(): TextStyle =
         )
 
         FuzeTextStyle.SMALL -> TextStyle(
-            fontSize = 16.sp,
+            fontSize = 14.sp,
             fontWeight = FontWeight.W700,
             lineHeight = 24.sp,
             letterSpacing = (-0.2).sp,
@@ -81,7 +81,7 @@ internal fun FuzeTextStyle.toTextStyle(): TextStyle =
         )
 
         FuzeTextStyle.SMALL_SUBTLE -> TextStyle(
-            fontSize = 14.sp,
+            fontSize = 12.sp,
             fontWeight = FontWeight.W400,
             lineHeight = 20.sp,
             letterSpacing = (-0.2).sp,
@@ -89,15 +89,16 @@ internal fun FuzeTextStyle.toTextStyle(): TextStyle =
         )
 
         FuzeTextStyle.X_SMALL -> TextStyle(
-            fontSize = 12.sp,
+            fontSize = 10.sp,
             fontWeight = FontWeight.W700,
             lineHeight = 16.sp,
         )
 
         FuzeTextStyle.X_SMALL_SUBTLE -> TextStyle(
-            fontSize = 12.sp,
+            fontSize = 10.sp,
             fontWeight = FontWeight.W400,
-            lineHeight = 12.sp,
+            lineHeight = 10.sp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 

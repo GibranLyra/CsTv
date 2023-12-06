@@ -22,12 +22,12 @@ internal fun ScreenTopBar(
             )
         }
 
-        AppTopBar.IMAGE_TITLE -> {
-            // TODO
-        }
-
-        AppTopBar.BLURRED_IMAGE -> {
-            // TODO
+        AppTopBar.CENTERED -> {
+            CenteredTopBar(
+                title = toolbarData.title,
+                canNavigateBack = navController.previousBackStackEntry != null,
+                navigateUp = navigateUp
+            )
         }
     }
 }

@@ -9,11 +9,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +28,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gibranlyra.fuzecctest.R
@@ -66,7 +67,7 @@ internal fun MatchItem(
                 .align(Alignment.End)
                 .clip(
                     RoundedCornerShape(
-                        bottomStart = dimensionResource(R.dimen.padding_large),
+                        bottomStart = dimensionResource(R.dimen.padding_xlarge),
                         topEnd = dimensionResource(R.dimen.padding_large)
                     )
                 )
@@ -83,15 +84,26 @@ internal fun MatchItem(
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            TeamView(match.team1Image, match.team1Name)
+            TeamView(
+                modifier = Modifier.weight(2f),
+                teamImage = match.team1Image,
+                teamName = match.team1Name
+            )
 
             FuzeText(
                 text = stringResource(id = R.string.versus),
-                style = FuzeTextStyle.X_SMALL_SUBTLE
+                style = FuzeTextStyle.SMALL_SUBTLE,
+                styleOverride = TextStyle(color = MaterialTheme.colorScheme.onTertiary)
             )
 
-            TeamView(match.team2Image, match.team2Name)
+            TeamView(
+                modifier = Modifier.weight(2f),
+                teamImage = match.team2Image,
+                teamName = match.team2Name
+            )
         }
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_medium)))
 
         Divider(thickness = 1.dp)
 
@@ -120,7 +132,11 @@ private fun TeamView(
     teamName: String,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.width(120.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = modifier
+            .padding(vertical = dimensionResource(id = R.dimen.padding_medium)),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         FuzeAsyncImage(
             imageUrl = teamImage.getImage(PandaImage.ImageType.THUMBNAIL),
             modifier = Modifier
@@ -131,15 +147,18 @@ private fun TeamView(
         FuzeText(
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center,
-            text = teamName
+            text = teamName,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 2,
+            style = FuzeTextStyle.BASE_SUBTLE
         )
     }
 }
 
 @Composable
 private fun getStickerTextStyle(matchStatus: MatchStatus) = when (matchStatus) {
-    MatchStatus.RUNNING -> TextStyle(color = MaterialTheme.colorScheme.onPrimary)
-    MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> TextStyle(color = MaterialTheme.colorScheme.onTertiary)
+    MatchStatus.RUNNING -> TextStyle(color = MaterialTheme.colorScheme.onError)
+    MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> TextStyle(color = MaterialTheme.colorScheme.onSecondary)
 }
 
 @Composable
@@ -148,10 +167,10 @@ fun getStickerBackground(matchStatus: MatchStatus): Color {
 
     return when (matchStatus) {
         MatchStatus.RUNNING -> {
-            val color = remember { Animatable(colorScheme.tertiary) }
+            val color = remember { Animatable(colorScheme.secondary) }
             LaunchedEffect(Unit) {
                 color.animateTo(
-                    targetValue = Color.Red,
+                    targetValue = colorScheme.errorContainer,
                     animationSpec = infiniteRepeatable(
                         animation = tween(1000),
                         repeatMode = RepeatMode.Reverse
@@ -161,7 +180,7 @@ fun getStickerBackground(matchStatus: MatchStatus): Color {
             color.value
         }
 
-        MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> colorScheme.tertiary
+        MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> colorScheme.secondary
     }
 }
 
@@ -191,7 +210,7 @@ internal fun MatchItemPreviewFinished() {
 
 internal fun stubMatch(id: Int) = MatchData(
     id = id,
-    team1Name = "name 1 $id",
+    team1Name = "Really Really long team name$id",
     team2Name = "name 2 $id",
     leagueImageUrl = "",
     matchStatus = MatchStatus.RUNNING,

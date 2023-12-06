@@ -111,7 +111,11 @@ private fun LazyListScope.matchListItemHandler(
 
 @Composable
 private fun HomeLoadingView(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
         FuzeCircularLoading()
     }
 }

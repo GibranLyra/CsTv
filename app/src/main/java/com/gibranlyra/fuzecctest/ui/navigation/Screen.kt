@@ -12,7 +12,7 @@ internal sealed class Screen(val route: String, val appTopBar: AppTopBar) {
     data object Home : Screen(route = ScreenType.HOME.name, appTopBar = AppTopBar.SIMPLE)
     data object MatchDetails : Screen(
         route = ScreenType.MATCH_DETAILS.name,
-        appTopBar = AppTopBar.SIMPLE
+        appTopBar = AppTopBar.CENTERED
     ) {
         const val matchIdArg = "matchId"
 

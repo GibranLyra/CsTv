@@ -8,5 +8,5 @@ data class PlayerData(
     val playerId: Int,
     val nickName: String = "",
     val name: String = "",
-    val imageUrl: String = ""
+    val playerImage: PandaImage = PandaImage()
 ) : Parcelable

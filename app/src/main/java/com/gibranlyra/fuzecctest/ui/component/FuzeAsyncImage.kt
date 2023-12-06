@@ -28,7 +28,7 @@ internal fun FuzeAsyncImage(
             .memoryCachePolicy(CachePolicy.ENABLED)
             .apply {
                 if (blurImage) {
-                    transformations(BlurTransformation(scale = 1f, radius = 4))
+                    transformations(BlurTransformation(scale = 1f, radius = 12))
                 }
             }
 
