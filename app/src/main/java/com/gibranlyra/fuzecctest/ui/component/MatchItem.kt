@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
@@ -47,7 +49,7 @@ internal fun MatchItem(
 
     Column(
         modifier = modifier
-            .height(212.dp)
+            .height(dimensionResource(id = R.dimen.match_container_height))
             .clip(roundedCorner)
             .clickable(onClick = { onClick(match) })
             .background(MaterialTheme.colorScheme.primary)
@@ -85,21 +87,36 @@ internal fun MatchItem(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             TeamView(
-                modifier = Modifier.weight(2f),
                 teamImage = match.team1Image,
-                teamName = match.team1Name
+                teamName = match.team1Name,
+                modifier = Modifier.weight(2f),
+                horizontalAlignment = Alignment.End,
+                textAlign = TextAlign.End
             )
 
+            Spacer(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(dimensionResource(id = R.dimen.padding_medium))
+            )
             FuzeText(
                 text = stringResource(id = R.string.versus),
                 style = FuzeTextStyle.SMALL_SUBTLE,
                 styleOverride = TextStyle(color = MaterialTheme.colorScheme.onTertiary)
             )
 
+            Spacer(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(dimensionResource(id = R.dimen.padding_medium))
+            )
+
             TeamView(
-                modifier = Modifier.weight(2f),
                 teamImage = match.team2Image,
-                teamName = match.team2Name
+                teamName = match.team2Name,
+                modifier = Modifier.weight(2f),
+                horizontalAlignment = Alignment.Start,
+                textAlign = TextAlign.Start
             )
         }
 
@@ -130,12 +147,14 @@ internal fun MatchItem(
 private fun TeamView(
     teamImage: PandaImage,
     teamName: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    horizontalAlignment: Alignment.Horizontal,
+    textAlign: TextAlign
 ) {
     Column(
         modifier = modifier
             .padding(vertical = dimensionResource(id = R.dimen.padding_medium)),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = horizontalAlignment
     ) {
         FuzeAsyncImage(
             imageUrl = teamImage.getImage(PandaImage.ImageType.THUMBNAIL),
@@ -146,7 +165,7 @@ private fun TeamView(
 
         FuzeText(
             modifier = Modifier.weight(1f),
-            textAlign = TextAlign.Center,
+            textAlign = textAlign,
             text = teamName,
             overflow = TextOverflow.Ellipsis,
             maxLines = 2,

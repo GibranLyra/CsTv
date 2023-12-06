@@ -86,6 +86,7 @@ dependencies {
     implementation(libs.android.paging.compose)
     implementation(libs.hilt.android.testing)
     implementation(libs.material.pulltorefresh)
+    implementation(libs.core.splashscreen)
     implementation(libs.threetenbp)
     kapt(libs.hilt.compiler)
     kapt(libs.android.hilt.compiler)

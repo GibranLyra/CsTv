@@ -29,6 +29,7 @@ appcompat = "1.6.1"
 material = "1.10.0"
 threetenbp = "1.6.0"
 pulltorefresh = "1.5.4"
+core-splashscreen = "1.0.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -82,6 +83,7 @@ android-paging-compose = { module = "androidx.paging:paging-compose", version.re
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 material-pulltorefresh = { module = "androidx.compose.material:material", version.ref = "pulltorefresh" }
+core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "core-splashscreen" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
