@@ -12,6 +12,8 @@ internal data class HomeUiState(
 )
 
 internal sealed interface HomeEvents {
-    data class NavigateToMatchDetailsScreen(val matchId: Int) : HomeEvents
-    data class IsMatchRefreshing(val isRefreshing: Boolean = false): HomeEvents
+    data class NavigateToMatchDetailsScreen(val matchId: Int, val team1Id: Int, val team2Id: Int) :
+        HomeEvents
+
+    data class IsMatchRefreshing(val isRefreshing: Boolean = false) : HomeEvents
 }

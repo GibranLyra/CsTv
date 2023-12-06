@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Opponent(
     @SerialName("opponent")
-    val opponent: OpponentX = OpponentX(),
+    val opponent: Team = Team(),
     @SerialName("type")
     val type: String = ""
 )

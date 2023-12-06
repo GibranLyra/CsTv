@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.gibranlyra.fuzecctest.domain.model.ToolbarData
 import com.gibranlyra.fuzecctest.ui.screen.home.homeScreenComposable
+import com.gibranlyra.fuzecctest.ui.screen.matchdetails.matchDetailsScreenComposable
 
 @Composable
 internal fun AppNavHost(
@@ -24,6 +25,11 @@ internal fun AppNavHost(
     ) {
         homeScreenComposable(
             navController = navController,
+            onToolbarComposition = onToolbarComposition
+        )
+
+        matchDetailsScreenComposable(
+            context = context,
             onToolbarComposition = onToolbarComposition
         )
     }

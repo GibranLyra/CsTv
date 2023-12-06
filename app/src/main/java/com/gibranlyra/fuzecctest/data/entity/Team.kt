@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OpponentX(
+data class Team(
     @SerialName("acronym")
     val acronym: String? = null,
     @SerialName("id")
@@ -19,5 +19,7 @@ data class OpponentX(
     @SerialName("name")
     val name: String = "",
     @SerialName("slug")
-    val slug: String = ""
+    val slug: String = "",
+    @SerialName("players")
+    val players: List<Player>? = listOf()
 )

@@ -36,4 +36,22 @@ internal class HomeViewModel @Inject constructor(
     private fun updateMatchesPagingDataState(matchesState: Flow<PagingData<MatchData>>) {
         _uiState.update { currentState -> currentState.copy(matchesPagingState = matchesState) }
     }
+
+    fun navigateToMatchDetailsScreen(matchId: Int, team1Id: Int, team2Id: Int) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                navigateToMatchDetailScreen = HomeEvents.NavigateToMatchDetailsScreen(
+                    matchId,
+                    team1Id,
+                    team2Id
+                )
+            )
+        }
+    }
+
+    fun navigatedMatchDetailsScreen() {
+        _uiState.update { currentState ->
+            currentState.copy(navigateToMatchDetailScreen = null)
+        }
+    }
 }

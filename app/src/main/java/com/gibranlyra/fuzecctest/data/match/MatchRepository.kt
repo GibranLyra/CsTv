@@ -1,14 +1,21 @@
 package com.gibranlyra.fuzecctest.data.match
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.gibranlyra.fuzecctest.data.di.MatchPager
+import com.gibranlyra.fuzecctest.data.di.module.MatchPager
+import com.gibranlyra.fuzecctest.data.entity.Result
 import com.gibranlyra.fuzecctest.domain.model.MatchData
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
+private const val TAG: String = "MatchRepository"
+
+@Singleton
 class MatchRepository @Inject constructor(
     @MatchPager private val pager: Pager<Int, MatchData>
 ) {
@@ -23,5 +30,16 @@ class MatchRepository @Inject constructor(
                     match
                 }
             }
+    }
+
+    fun getMatch(matchId: Int): Flow<Result<MatchData>> {
+        return flow {
+            try {
+                emit(Result.Success(matches.getValue(matchId)))
+            } catch (e: NoSuchElementException) {
+                Log.e(TAG, "getMatch: Match $matchId not found.", e)
+                emit(Result.Error("Match $matchId not found."))
+            }
+        }
     }
 }

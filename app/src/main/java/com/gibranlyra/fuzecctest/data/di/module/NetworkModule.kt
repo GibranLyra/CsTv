@@ -1,4 +1,4 @@
-package com.gibranlyra.fuzecctest.data.di
+package com.gibranlyra.fuzecctest.data.di.module
 
 import com.gibranlyra.fuzecctest.BuildConfig
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory

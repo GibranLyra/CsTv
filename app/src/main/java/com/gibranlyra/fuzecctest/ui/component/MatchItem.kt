@@ -49,7 +49,7 @@ internal fun MatchItem(
             .height(212.dp)
             .clip(roundedCorner)
             .clickable(onClick = { onClick(match) })
-            .background(MaterialTheme.colorScheme.onPrimary)
+            .background(MaterialTheme.colorScheme.primary)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
@@ -85,7 +85,10 @@ internal fun MatchItem(
         ) {
             TeamView(match.team1Image, match.team1Name)
 
-            FuzeText(text = stringResource(id = R.string.versus))
+            FuzeText(
+                text = stringResource(id = R.string.versus),
+                style = FuzeTextStyle.X_SMALL_SUBTLE
+            )
 
             TeamView(match.team2Image, match.team2Name)
         }
@@ -103,7 +106,10 @@ internal fun MatchItem(
                 modifier = Modifier.size(dimensionResource(id = R.dimen.league_thumbnail_image_size)),
                 imageUrl = match.leagueImageUrl
             )
-            FuzeText(text = "${match.leagueName} + ${match.serieName}")
+            FuzeText(
+                text = "${match.leagueName} + ${match.serieName}",
+                style = FuzeTextStyle.X_SMALL_SUBTLE
+            )
         }
     }
 }
@@ -131,7 +137,7 @@ private fun TeamView(
 }
 
 @Composable
-private fun getStickerTextStyle(matchStatus: MatchStatus) = when(matchStatus) {
+private fun getStickerTextStyle(matchStatus: MatchStatus) = when (matchStatus) {
     MatchStatus.RUNNING -> TextStyle(color = MaterialTheme.colorScheme.onPrimary)
     MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> TextStyle(color = MaterialTheme.colorScheme.onTertiary)
 }
@@ -140,9 +146,9 @@ private fun getStickerTextStyle(matchStatus: MatchStatus) = when(matchStatus) {
 fun getStickerBackground(matchStatus: MatchStatus): Color {
     val colorScheme = MaterialTheme.colorScheme
 
-    return when(matchStatus) {
+    return when (matchStatus) {
         MatchStatus.RUNNING -> {
-            val color = remember { Animatable(colorScheme.primary) }
+            val color = remember { Animatable(colorScheme.tertiary) }
             LaunchedEffect(Unit) {
                 color.animateTo(
                     targetValue = Color.Red,
@@ -154,6 +160,7 @@ fun getStickerBackground(matchStatus: MatchStatus): Color {
             }
             color.value
         }
+
         MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> colorScheme.tertiary
     }
 }

@@ -1,4 +1,4 @@
-package com.gibranlyra.fuzecctest.data.di
+package com.gibranlyra.fuzecctest.data.di.module
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig

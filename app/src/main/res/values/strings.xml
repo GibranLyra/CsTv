@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">FuzeccTest</string>
     <string name="back_button">Go back</string>
+    <string name="retry">Retry</string>
 
     <!--Home-->
     <string name="home_screen_title">Matches</string>
     <string name="home_screen_error">Error loading home information.</string>
-    <string name="retry">Retry</string>
     <string name="versus">vs</string>
     <string name="live_match">LIVE!</string>
     <string name="scheduled_match">Scheduled for: %s</string>
     <string name="finished_match">Finished: %s</string>
+
+    <!--Match Details-->
+    <string name="match_detail_screen_default_title">Match</string>
+    <string name="match_detail_error_match_cannot_be_loaded">Error loading match details.</string>
+    <string name="match_detail_error_team_cannot_be_loaded">Error loading teams details.</string>
 </resources>

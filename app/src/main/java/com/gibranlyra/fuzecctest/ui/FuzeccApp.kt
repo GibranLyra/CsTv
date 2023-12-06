@@ -26,7 +26,7 @@ internal fun FuzeccApp(navController: NavHostController = rememberNavController(
 
     LaunchedEffect(navController.currentBackStackEntryFlow) {
         navController.currentBackStackEntryFlow.collect { backStackEntry ->
-            val screenName = backStackEntry.getRouteWithoutArguments() ?: ""
+            val screenName = backStackEntry.getRouteWithoutArguments().orEmpty()
             currentScreen = ScreenType.valueOf(screenName).screen
         }
     }

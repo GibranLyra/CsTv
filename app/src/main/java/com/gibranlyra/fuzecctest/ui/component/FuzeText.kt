@@ -1,5 +1,6 @@
 package com.gibranlyra.fuzecctest.ui.component
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -47,38 +48,44 @@ internal fun FuzeTextStyle.toTextStyle(): TextStyle =
             fontSize = 24.sp,
             fontWeight = FontWeight.W700,
             lineHeight = 32.sp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         FuzeTextStyle.LARGE_SUBTLE -> TextStyle(
             fontSize = 22.sp,
             fontWeight = FontWeight.W400,
             lineHeight = 28.sp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         FuzeTextStyle.BASE -> TextStyle(
             fontSize = 16.sp,
             fontWeight = FontWeight.W700,
             lineHeight = 24.sp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         FuzeTextStyle.BASE_SUBTLE -> TextStyle(
             fontSize = 14.sp,
             fontWeight = FontWeight.W400,
             lineHeight = 20.sp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         FuzeTextStyle.SMALL -> TextStyle(
             fontSize = 16.sp,
             fontWeight = FontWeight.W700,
             lineHeight = 24.sp,
-            letterSpacing = (-0.2).sp
+            letterSpacing = (-0.2).sp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         FuzeTextStyle.SMALL_SUBTLE -> TextStyle(
             fontSize = 14.sp,
             fontWeight = FontWeight.W400,
             lineHeight = 20.sp,
-            letterSpacing = (-0.2).sp
+            letterSpacing = (-0.2).sp,
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         FuzeTextStyle.X_SMALL -> TextStyle(
