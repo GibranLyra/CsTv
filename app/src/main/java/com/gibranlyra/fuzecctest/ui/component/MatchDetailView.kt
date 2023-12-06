@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -67,7 +66,7 @@ internal fun MatchDetailView(
                 FuzeText(
                     text = stringResource(id = R.string.versus),
                     style = FuzeTextStyle.SMALL_SUBTLE,
-                    styleOverride = TextStyle(color = MaterialTheme.colorScheme.onTertiary)
+                    styleOverride = TextStyle(color = colorScheme.onTertiary)
                 )
 
                 Spacer(

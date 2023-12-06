@@ -51,7 +51,7 @@ internal fun MatchItem(
             .height(dimensionResource(id = R.dimen.match_container_height))
             .clip(roundedCorner)
             .clickable(onClick = { onClick(match) })
-            .background(MaterialTheme.colorScheme.primary)
+            .background(colorScheme.primary)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
@@ -101,7 +101,7 @@ internal fun MatchItem(
             FuzeText(
                 text = stringResource(id = R.string.versus),
                 style = FuzeTextStyle.SMALL_SUBTLE,
-                styleOverride = TextStyle(color = MaterialTheme.colorScheme.onTertiary)
+                styleOverride = TextStyle(color = colorScheme.onTertiary)
             )
 
             Spacer(
@@ -144,8 +144,8 @@ internal fun MatchItem(
 
 @Composable
 fun getStickerTextStyle(matchStatus: MatchStatus) = when (matchStatus) {
-    MatchStatus.RUNNING -> TextStyle(color = MaterialTheme.colorScheme.onError)
-    MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> TextStyle(color = MaterialTheme.colorScheme.onSecondary)
+    MatchStatus.RUNNING -> TextStyle(color = colorScheme.onError)
+    MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> TextStyle(color = colorScheme.onSecondary)
 }
 
 @Composable
