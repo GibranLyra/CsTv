@@ -10,5 +10,6 @@
     <dimen name="league_thumbnail_image_size">24dp</dimen>
     <dimen name="player_container_height">95dp</dimen>
     <dimen name="match_container_height">222dp</dimen>
+    <dimen name="match_details_container_height">200dp</dimen>
     <dimen name="player_image_width">55dp</dimen>
 </resources>

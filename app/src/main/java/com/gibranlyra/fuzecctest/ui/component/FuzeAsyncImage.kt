@@ -11,7 +11,6 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.gibranlyra.fuzecctest.R
-import com.gibranlyra.fuzecctest.util.BlurTransformation
 
 @Composable
 internal fun FuzeAsyncImage(
@@ -20,17 +19,11 @@ internal fun FuzeAsyncImage(
     contentDescription: String? = null,
     placeholder: Painter = painterResource(id = R.drawable.ic_launcher_foreground),
     contentScale: ContentScale = ContentScale.Fit,
-    blurImage: Boolean = false,
 ) {
     if (imageUrl.isNotEmpty()) {
         val request = ImageRequest.Builder(LocalContext.current)
             .data(imageUrl)
             .memoryCachePolicy(CachePolicy.ENABLED)
-            .apply {
-                if (blurImage) {
-                    transformations(BlurTransformation(scale = 1f, radius = 12))
-                }
-            }
 
         AsyncImage(
             modifier = modifier,

@@ -38,7 +38,7 @@ import com.gibranlyra.fuzecctest.ui.component.FuzeAsyncImage
 import com.gibranlyra.fuzecctest.ui.component.FuzeCircularLoading
 import com.gibranlyra.fuzecctest.ui.component.FuzeText
 import com.gibranlyra.fuzecctest.ui.component.FuzeTextStyle
-import com.gibranlyra.fuzecctest.ui.component.MatchItem
+import com.gibranlyra.fuzecctest.ui.component.MatchDetailView
 import com.gibranlyra.fuzecctest.ui.component.RetryButton
 import com.gibranlyra.fuzecctest.ui.component.stubMatch
 import com.gibranlyra.fuzecctest.ui.theme.FuzeccTheme
@@ -54,7 +54,7 @@ internal fun MatchDetailsScreen(
 
     Column(
         modifier = modifier
-            .padding(dimensionResource(R.dimen.padding_large))
+            .padding(horizontal = dimensionResource(R.dimen.padding_large))
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -75,7 +75,7 @@ internal fun MatchDetailsScreen(
 
 @Composable
 private fun MatchDetailsScreenLoaded(matchData: MatchData) {
-    MatchItem(match = matchData)
+    MatchDetailView(match = matchData)
 }
 
 @Composable
@@ -124,10 +124,11 @@ private fun PlayersPanelView(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
+
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.Top,
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
@@ -260,7 +261,7 @@ private fun PlayerImage(
             .fillMaxHeight()
             .background(MaterialTheme.colorScheme.tertiary)
             .width(dimensionResource(id = R.dimen.player_image_width)),
-        contentScale = ContentScale.Crop,
+        contentScale = ContentScale.FillBounds,
         imageUrl = player.playerImage.getImage(PandaImage.ImageType.THUMBNAIL),
     )
 }
@@ -287,7 +288,7 @@ private fun UpdateTopBar(
 @Preview(showBackground = true)
 @Composable
 private fun MatchDetailsScreenLoadedPreview() {
-    FuzeccTheme {
+    FuzeccTheme(darkTheme = true) {
         MatchDetailsScreen(
             uiState = MatchDetailsUiState(
                 matchState = State.Loaded(stubMatch(111)),
