@@ -3,6 +3,7 @@ package com.gibranlyra.fuzecctest.data.pagingsource.match
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.gibranlyra.fuzecctest.data.di.module.PAGE_SIZE
 import com.gibranlyra.fuzecctest.data.ext.toMatchData
 import com.gibranlyra.fuzecctest.data.match.MatchDataSource
 import com.gibranlyra.fuzecctest.domain.model.MatchData
@@ -10,7 +11,6 @@ import com.gibranlyra.fuzecctest.util.getCurrentDateTime
 import javax.inject.Inject
 
 private const val STARTING_PAGE = 1
-private const val PAGE_SIZE = 50
 
 private const val TAG: String = "MatchPagingSource"
 

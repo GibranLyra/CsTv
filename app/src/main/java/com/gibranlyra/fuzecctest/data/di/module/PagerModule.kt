@@ -13,7 +13,7 @@ import javax.inject.Qualifier
 @Qualifier
 annotation class MatchPager
 
-private const val PAGE_SIZE = 20
+const val PAGE_SIZE = 20
 
 @Module
 @InstallIn(SingletonComponent::class)
