@@ -42,7 +42,7 @@ JUnit is a widely-used testing framework for writing and running unit tests, ens
 
 Android Paging efficiently loads and displays large datasets in a RecyclerView, making it suitable for implementing infinite scrolling and optimizing user experience.
 
-### 8. [Core Splashscreen](https://github.com/Kotlin/kotlinx.coroutines)
+### 8. [Core Splashscreen](https://developer.android.com/reference/kotlin/androidx/core/splashscreen/SplashScreen)
 
 Core Splashscreen library is used to implement a splash screen, providing a smooth transition before displaying the main content of the app.
 
