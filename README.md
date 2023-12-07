@@ -42,6 +42,10 @@ Core Splashscreen library is used to implement a splash screen, providing a smoo
 
 Robolectric is a framework for unit testing Android applications outside an emulator or device, enhancing the speed and reliability of unit tests.
 
+### 10. [Hilt](https://dagger.dev/hilt/)
+
+Hilt is used for dependency injection in Android, simplifying the setup and management of dependencies in the app.
+
 ## Architecture
 
 FuzeccCsTv follows the MVVM (Model-View-ViewModel) architecture and employs the repository pattern for clean and maintainable code.
