@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -259,9 +258,7 @@ private fun PlayerImage(
         modifier = Modifier
             .clip(roundedCorner)
             .fillMaxHeight()
-            .background(MaterialTheme.colorScheme.tertiary)
             .width(dimensionResource(id = R.dimen.player_image_width)),
-        contentScale = ContentScale.FillBounds,
         imageUrl = player.playerImage.getImage(PandaImage.ImageType.THUMBNAIL),
     )
 }

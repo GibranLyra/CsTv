@@ -8,18 +8,18 @@ import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 fun convertToLocalDateTime(utcString: String): String {
-    val brazilTimeZone = ZoneId.of("America/Sao_Paulo")
-    val brazilDateTime = ZonedDateTime.ofInstant(Instant.parse(utcString), brazilTimeZone)
+    val deviceTimeZone = ZoneId.systemDefault()
+    val deviceDateTime = ZonedDateTime.ofInstant(Instant.parse(utcString), deviceTimeZone)
 
-    val currentBrazilTime = ZonedDateTime.now(brazilTimeZone)
+    val currentBrazilTime = ZonedDateTime.now(deviceTimeZone)
 
 
     val longDateFormat =
-        DateTimeFormatter.ofPattern("dd.MM.YYYY, HH:mm").let { brazilDateTime.format(it) }
-    val smallDateFormat = DateTimeFormatter.ofPattern("HH:mm").let { brazilDateTime.format(it) }
+        DateTimeFormatter.ofPattern("dd.MM.YYYY, HH:mm").let { deviceDateTime.format(it) }
+    val smallDateFormat = DateTimeFormatter.ofPattern("HH:mm").let { deviceDateTime.format(it) }
 
     return when {
-        isToday(currentBrazilTime, brazilDateTime) -> "Today, $smallDateFormat"
+        isToday(currentBrazilTime, deviceDateTime) -> "Today, $smallDateFormat"
         else -> longDateFormat
     }
 }
