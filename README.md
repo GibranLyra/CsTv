@@ -74,8 +74,6 @@ FuzeccCsTv follows the MVVM (Model-View-ViewModel) architecture and employs the 
 
     Build and run the project with "Run" button.
 
-[Include any additional setup instructions or prerequisites if necessary.]
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
