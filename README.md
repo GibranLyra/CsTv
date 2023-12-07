@@ -44,7 +44,7 @@ Robolectric is a framework for unit testing Android applications outside an emul
 
 ### 10. [Hilt](https://dagger.dev/hilt/)
 
-Hilt is used for dependency injection in Android, simplifying the setup and management of dependencies in the app.
+Hilt is used for dependency injection, simplifying the setup and management of dependencies in the app.
 
 ## Architecture
 
