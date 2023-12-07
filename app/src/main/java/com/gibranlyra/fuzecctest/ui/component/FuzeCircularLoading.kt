@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 
-internal const val SAMPLE_CIRCULAR_LOADING_TEST_TAG = "SAMPLE_CIRCULAR_LOADING_TEST_TAG"
+internal const val HOME_CIRCULAR_LOADING_TEST_TAG = "HOME_CIRCULAR_LOADING_TEST_TAG"
 
 @Composable
 fun FuzeCircularLoading(
@@ -16,7 +16,7 @@ fun FuzeCircularLoading(
     trackColor: Color = MaterialTheme.colorScheme.secondary,
 ) {
     CircularProgressIndicator(
-        modifier = modifier.testTag(SAMPLE_CIRCULAR_LOADING_TEST_TAG),
+        modifier = modifier.testTag(HOME_CIRCULAR_LOADING_TEST_TAG),
         color = color,
         trackColor = trackColor,
     )

@@ -15,6 +15,7 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,7 +35,6 @@ import com.gibranlyra.fuzecctest.ui.theme.FuzeccTheme
 import kotlinx.coroutines.flow.flowOf
 import java.io.IOException
 
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun HomeScreen(
@@ -52,7 +52,11 @@ internal fun HomeScreen(
         onRefresh = { onRefreshMatches() }
     )
 
-    Box(Modifier.pullRefresh(pullRefreshState)) {
+    Box(
+        Modifier
+            .testTag(REFRESH_MATCHES_TEST_TAG)
+            .pullRefresh(pullRefreshState)
+    ) {
         MatchesList(modifier, uiState, onMatchClicked, onRetryButtonClicked)
 
         PullRefreshIndicator(
@@ -84,7 +88,13 @@ private fun MatchesList(
             count = matches.itemCount,
             key = matches.itemKey { it.id },
         ) { index ->
-            matches[index]?.let { match -> MatchItem(match = match, onClick = onMatchClicked) }
+            matches[index]?.let { match ->
+                MatchItem(
+                    modifier = Modifier.testTag("$MATCH_TEST_TAG ${match.id}"),
+                    match = match,
+                    onClick = onMatchClicked
+                )
+            }
         }
 
         matchListItemHandler(
@@ -124,7 +134,7 @@ private fun HomeLoadingView(modifier: Modifier = Modifier) {
 fun HomeErrorView(modifier: Modifier = Modifier, onRetryButtonClicked: () -> Unit) {
     Column(modifier = modifier) {
         RetryButton<Nothing>(
-            message = stringResource(id = R.string.retry),
+            message = stringResource(id = R.string.home_screen_error),
             onClick = { onRetryButtonClicked.invoke() })
     }
 }
