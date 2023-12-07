@@ -2,7 +2,7 @@
 
 ## Overview
 
-FuzeccCsTv is an Android app designed to consume the [PandaScore API](https://developers.pandascore.io/), providing information on CS:GO matches and team details. The app utilizes various libraries to enhance functionality and maintain clean code.
+FuzeccCsTv is an Android app designed to consume the [PandaScore API](https://developers.pandascore.co/docs/introduction), providing information on CS:GO matches and team details. The app utilizes various libraries to enhance functionality and maintain clean code.
 
 ## Home 
 ![image](https://github.com/GibranLyra/CsTv/assets/5739609/245869f0-2fd4-4715-bfac-0f16f6aee29a)
