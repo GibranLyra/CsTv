@@ -38,7 +38,7 @@ Turbine simplifies testing asynchronous code, offering a concise syntax for writ
 
 JUnit is a widely-used testing framework for writing and running unit tests, ensuring the correctness of the application's logic.
 
-### 7. [Android Paging](https://developer.android.com/topic/libraries/architecture/paging)
+### 7. [Android Paging](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 
 Android Paging efficiently loads and displays large datasets in a RecyclerView, making it suitable for implementing infinite scrolling and optimizing user experience.
 
