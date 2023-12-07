@@ -4,6 +4,14 @@
 
 FuzeccCsTv is an Android app designed to consume the [PandaScore API](https://developers.pandascore.io/), providing information on CS:GO matches and team details. The app utilizes various libraries to enhance functionality and maintain clean code.
 
+## Home 
+![image](https://github.com/GibranLyra/CsTv/assets/5739609/245869f0-2fd4-4715-bfac-0f16f6aee29a)
+
+## Match details
+![image](https://github.com/GibranLyra/CsTv/assets/5739609/1a73f1c2-a1a4-4a5c-9a90-0f9157812f62)
+
+
+
 ## Libraries Used
 
 ### 1. [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
