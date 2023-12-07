@@ -87,7 +87,7 @@ internal class MatchDetailsViewModel @AssistedInject constructor(
 
     private fun updateMatchStateToError() {
         _uiState.update { currentState ->
-            currentState.copy(matchState = State.Error(R.string.match_detail_error_team_cannot_be_loaded))
+            currentState.copy(matchState = State.Error(R.string.match_detail_error_match_cannot_be_loaded))
         }
     }
 
@@ -105,7 +105,7 @@ internal class MatchDetailsViewModel @AssistedInject constructor(
 
     private fun updateTeamsStateToError() {
         _uiState.update { currentState ->
-            currentState.copy(matchState = State.Error(R.string.match_detail_error_team_cannot_be_loaded))
+            currentState.copy(teamsState = State.Error(R.string.match_detail_error_team_cannot_be_loaded))
         }
     }
 
