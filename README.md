@@ -1,8 +1,10 @@
-# FuzeccCsTv
+# CsTv
 
 ## Overview
 
-FuzeccCsTv is an Android app designed to consume the [PandaScore API](https://developers.pandascore.io/), providing information on CS:GO matches and team details. The app utilizes various libraries to enhance functionality and maintain clean code.
+CsTv is an Android app designed to consume the [PandaScore API](https://developers.pandascore.io/),
+providing information on CS:GO matches and team details. The app utilizes various libraries to
+enhance functionality and maintain clean code.
 
 ## Home 
 ![image](https://github.com/GibranLyra/CsTv/assets/5739609/245869f0-2fd4-4715-bfac-0f16f6aee29a)
@@ -56,7 +58,8 @@ Hilt is used for dependency injection, simplifying the setup and management of d
 
 ## Architecture
 
-FuzeccCsTv follows the MVVM (Model-View-ViewModel) architecture and employs the repository pattern for clean and maintainable code.
+CsTv follows the MVVM (Model-View-ViewModel) architecture and employs the repository pattern for
+clean and maintainable code.
 
 ## Getting Started
 

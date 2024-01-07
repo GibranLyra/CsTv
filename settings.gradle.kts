@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "FuzeccTest"
+rootProject.name = "CsTv"
 include(":app")
  

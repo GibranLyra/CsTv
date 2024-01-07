@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    namespace = "com.gibranlyra.fuzecctest"
+    namespace = "com.gibranlyra.cstv"
     compileSdk = 34
 
     buildFeatures {
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.gibranlyra.fuzecctest"
+        applicationId = "com.gibranlyra.cstv"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
