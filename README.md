@@ -2,7 +2,7 @@
 
 ## Overview
 
-CsTv is an Android app designed to consume the [PandaScore API](https://developers.pandascore.io/),
+CsTv is an Android app designed to consume the [PandaScore API](https://developers.pandascore.co/docs/introduction),
 providing information on CS:GO matches and team details. The app utilizes various libraries to
 enhance functionality and maintain clean code.
 
@@ -40,7 +40,7 @@ Turbine simplifies testing asynchronous code, offering a concise syntax for writ
 
 JUnit is a widely-used testing framework for writing and running unit tests, ensuring the correctness of the application's logic.
 
-### 7. [Android Paging](https://developer.android.com/topic/libraries/architecture/paging)
+### 7. [Android Paging](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 
 Android Paging efficiently loads and displays large datasets in a RecyclerView, making it suitable for implementing infinite scrolling and optimizing user experience.
 
@@ -76,8 +76,6 @@ clean and maintainable code.
 3. **Build and run the project:**
 
     Build and run the project with "Run" button.
-
-[Include any additional setup instructions or prerequisites if necessary.]
 
 ## License
 
