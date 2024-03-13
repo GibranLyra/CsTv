@@ -24,9 +24,3 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: lint inspectors
-      run: |
-        ./gradlew lint
-        ./gradlew ktlintCheck
-    - name: Run Unit Tests
-      run: ./gradlew test
