@@ -6,6 +6,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
+import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -14,9 +17,6 @@ import okhttp3.Request
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import java.util.concurrent.TimeUnit
-import javax.inject.Qualifier
-import javax.inject.Singleton
 
 @Qualifier
 annotation class BaseUrl
@@ -30,11 +30,10 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor().apply {
-            // The log level would be dependent of the build type. In Release build, it would be NONE
-            level = HttpLoggingInterceptor.Level.BASIC
-        }
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        // The log level would be dependent of the build type. In Release build, it would be NONE
+        level = HttpLoggingInterceptor.Level.BASIC
+    }
 
     @Provides
     @Singleton
@@ -60,10 +59,7 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(
-        @BaseUrl baseUrl: String,
-        okHttpClient: OkHttpClient,
-    ): Retrofit {
+    fun provideRetrofit(@BaseUrl baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
         val contentType = "application/json".toMediaType()
         val json =
             Json {

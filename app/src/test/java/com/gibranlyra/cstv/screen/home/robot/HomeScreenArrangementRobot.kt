@@ -32,4 +32,5 @@ internal class HomeScreenArrangementRobot(private val rule: ComposeContentTestRu
     }
 }
 
-internal fun HomeScreenKtTest.arrange(block: HomeScreenArrangementRobot.() -> Unit) = robotFactory.arrangementRobot.apply(block)
+internal fun HomeScreenKtTest.arrange(block: HomeScreenArrangementRobot.() -> Unit) =
+    robotFactory.arrangementRobot.apply(block)

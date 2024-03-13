@@ -20,4 +20,5 @@ internal class HomeScreenActionRobot(private val rule: ComposeTestRule) {
     }
 }
 
-internal fun HomeScreenKtTest.act(block: HomeScreenActionRobot.() -> Unit) = robotFactory.actionRobot.apply(block)
+internal fun HomeScreenKtTest.act(block: HomeScreenActionRobot.() -> Unit) =
+    robotFactory.actionRobot.apply(block)

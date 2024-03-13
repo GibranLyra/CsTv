@@ -21,10 +21,18 @@ import com.gibranlyra.cstv.ui.navigation.slideOutOfContainerTransition
 internal fun NavGraphBuilder.matchDetailsScreenComposable(
     context: Context,
     onToolbarComposition: (ToolbarData<String>) -> Unit,
-    enterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = { slideInEnterTransition() },
-    exitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = { slideOutEnterTransition() },
-    popEnterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = { slideIntoTransition() },
-    popExitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = { slideOutOfContainerTransition() },
+    enterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = {
+        slideInEnterTransition()
+    },
+    exitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = {
+        slideOutEnterTransition()
+    },
+    popEnterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = {
+        slideIntoTransition()
+    },
+    popExitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = {
+        slideOutOfContainerTransition()
+    },
 ) {
     composable(
         route = Screen.MatchDetails.routeWithArgs,
@@ -34,7 +42,7 @@ internal fun NavGraphBuilder.matchDetailsScreenComposable(
         popEnterTransition = popEnterTransition,
         popExitTransition = popExitTransition,
     ) { backStackEntry ->
-        val matchId = backStackEntry.arguments?.getInt(Screen.MatchDetails.matchIdArg) ?: -1
+        val matchId = backStackEntry.arguments?.getInt(Screen.MatchDetails.MATCH_ID_ARG) ?: -1
 
         val viewModelFactory =
             (context as Activity).viewModelFactoryProvider()

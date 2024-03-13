@@ -15,10 +15,10 @@ internal sealed class Screen(val route: String, val appTopBar: AppTopBar) {
         route = ScreenType.MATCH_DETAILS.name,
         appTopBar = AppTopBar.CENTERED,
     ) {
-        const val matchIdArg = "matchId"
+        const val MATCH_ID_ARG = "matchId"
 
-        val routeWithArgs = "$route/{$matchIdArg}"
+        val routeWithArgs = "$route/{$MATCH_ID_ARG}"
 
-        val arguments = listOf(navArgument(matchIdArg) { type = NavType.IntType })
+        val arguments = listOf(navArgument(MATCH_ID_ARG) { type = NavType.IntType })
     }
 }

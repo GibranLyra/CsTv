@@ -27,7 +27,5 @@ internal fun Match.toMatchData(): MatchData {
     )
 }
 
-private fun getOpponent(
-    opponents: List<Opponent>,
-    index: Int,
-) = opponents.getOrElse(index) { Opponent(Team(name = "TBD")) }.opponent
+private fun getOpponent(opponents: List<Opponent>, index: Int) =
+    opponents.getOrElse(index) { Opponent(Team(name = "TBD")) }.opponent

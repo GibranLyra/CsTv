@@ -15,48 +15,45 @@ private const val STARTING_PAGE = 1
 private const val TAG: String = "MatchPagingSource"
 
 internal class MatchPagingSource
-    @Inject
-    constructor(private val matchDataSource: MatchDataSource) :
+@Inject
+constructor(private val matchDataSource: MatchDataSource) :
     PagingSource<Int, MatchData>() {
-        private var plusDays = 0L
+    private var plusDays = 0L
 
-        override fun getRefreshKey(state: PagingState<Int, MatchData>): Int? =
-            state.anchorPosition?.let { anchorPosition ->
-                state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
-                    ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
-            }
-
-        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MatchData> {
-            return try {
-                val pageNumber = params.key ?: STARTING_PAGE
-
-                val response =
-                    matchDataSource.getMatches(PAGE_SIZE, pageNumber, getCurrentDateTime(plusDays))
-                        .asSequence()
-                        .sortedBy { match -> match.status.ordinal }
-                        .map { match -> match.toMatchData() }
-                        .toList()
-
-                val nextKey = getNextKey(response, pageNumber)
-
-                LoadResult.Page(
-                    data = response,
-                    prevKey = null,
-                    nextKey = nextKey,
-                )
-            } catch (e: Exception) {
-                Log.e(TAG, "load: ${e.message}", e)
-                LoadResult.Error(e)
-            }
+    override fun getRefreshKey(state: PagingState<Int, MatchData>): Int? =
+        state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
 
-        private fun getNextKey(
-            response: List<MatchData>,
-            pageNumber: Int,
-        ): Int {
-            if (response.isEmpty()) {
-                plusDays++
-            }
-            return if (response.isEmpty()) STARTING_PAGE else pageNumber.plus(1)
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MatchData> {
+        return try {
+            val pageNumber = params.key ?: STARTING_PAGE
+
+            val response =
+                matchDataSource.getMatches(PAGE_SIZE, pageNumber, getCurrentDateTime(plusDays))
+                    .asSequence()
+                    .sortedBy { match -> match.status.ordinal }
+                    .map { match -> match.toMatchData() }
+                    .toList()
+
+            val nextKey = getNextKey(response, pageNumber)
+
+            LoadResult.Page(
+                data = response,
+                prevKey = null,
+                nextKey = nextKey,
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "load: ${e.message}", e)
+            LoadResult.Error(e)
         }
     }
+
+    private fun getNextKey(response: List<MatchData>, pageNumber: Int): Int {
+        if (response.isEmpty()) {
+            plusDays++
+        }
+        return if (response.isEmpty()) STARTING_PAGE else pageNumber.plus(1)
+    }
+}

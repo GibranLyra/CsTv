@@ -53,9 +53,9 @@ internal fun MatchDetailsScreen(
 
     Column(
         modifier =
-            modifier
-                .padding(horizontal = dimensionResource(R.dimen.padding_large))
-                .fillMaxSize(),
+        modifier
+            .padding(horizontal = dimensionResource(R.dimen.padding_large))
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -106,10 +106,7 @@ fun MatchScreenMatchError(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun MatchScreenTeamsError(
-    modifier: Modifier = Modifier,
-    onRetryClick: (Int) -> Unit,
-) {
+fun MatchScreenTeamsError(modifier: Modifier = Modifier, onRetryClick: (Int) -> Unit) {
     RetryButton<Int>(
         message = stringResource(id = R.string.match_detail_error_team_cannot_be_loaded),
         modifier = modifier,
@@ -119,22 +116,21 @@ fun MatchScreenTeamsError(
 }
 
 @Composable
-private fun PlayersPanelView(
-    teamsData: MatchDetailsTeamsData,
-    modifier: Modifier = Modifier,
-) {
+private fun PlayersPanelView(teamsData: MatchDetailsTeamsData, modifier: Modifier = Modifier) {
     Column(
         modifier =
-            modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+        modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.Top,
-            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
+            horizontalArrangement = Arrangement.spacedBy(
+                dimensionResource(id = R.dimen.padding_large),
+            ),
         ) {
             Column(
                 Modifier
@@ -156,31 +152,28 @@ private fun PlayersPanelView(
 }
 
 @Composable
-private fun PlayerViewLeft(
-    player: PlayerData,
-    modifier: Modifier = Modifier,
-) {
+private fun PlayerViewLeft(player: PlayerData, modifier: Modifier = Modifier) {
     val roundedCorner = RoundedCornerShape(dimensionResource(R.dimen.padding_large))
 
     Column(
         modifier =
-            modifier
-                .height(dimensionResource(id = R.dimen.player_container_height))
-                .fillMaxWidth()
-                .padding(vertical = dimensionResource(id = R.dimen.padding_medium))
-                .clip(roundedCorner)
-                .background(MaterialTheme.colorScheme.primary),
+        modifier
+            .height(dimensionResource(id = R.dimen.player_container_height))
+            .fillMaxWidth()
+            .padding(vertical = dimensionResource(id = R.dimen.padding_medium))
+            .clip(roundedCorner)
+            .background(MaterialTheme.colorScheme.primary),
     ) {
         Row(
             modifier =
-                Modifier
-                    .padding(bottom = dimensionResource(id = R.dimen.padding_medium)),
+            Modifier
+                .padding(bottom = dimensionResource(id = R.dimen.padding_medium)),
         ) {
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxHeight()
-                        .weight(1f),
+                Modifier
+                    .fillMaxHeight()
+                    .weight(1f),
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Bottom,
             ) {
@@ -200,7 +193,11 @@ private fun PlayerViewLeft(
                 )
             }
 
-            Spacer(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)))
+            Spacer(
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = R.dimen.padding_small),
+                ),
+            )
 
             PlayerImage(roundedCorner, player)
         }
@@ -208,35 +205,36 @@ private fun PlayerViewLeft(
 }
 
 @Composable
-private fun PlayerViewRight(
-    player: PlayerData,
-    modifier: Modifier = Modifier,
-) {
+private fun PlayerViewRight(player: PlayerData, modifier: Modifier = Modifier) {
     val roundedCorner = RoundedCornerShape(dimensionResource(R.dimen.padding_large))
 
     Column(
         modifier =
-            modifier
-                .height(dimensionResource(id = R.dimen.player_container_height))
-                .fillMaxWidth()
-                .padding(vertical = dimensionResource(id = R.dimen.padding_medium))
-                .clip(roundedCorner)
-                .background(MaterialTheme.colorScheme.primary),
+        modifier
+            .height(dimensionResource(id = R.dimen.player_container_height))
+            .fillMaxWidth()
+            .padding(vertical = dimensionResource(id = R.dimen.padding_medium))
+            .clip(roundedCorner)
+            .background(MaterialTheme.colorScheme.primary),
     ) {
         Row(
             modifier =
-                Modifier
-                    .padding(bottom = dimensionResource(id = R.dimen.padding_medium)),
+            Modifier
+                .padding(bottom = dimensionResource(id = R.dimen.padding_medium)),
         ) {
             PlayerImage(roundedCorner = roundedCorner, player = player)
 
-            Spacer(modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small)))
+            Spacer(
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = R.dimen.padding_small),
+                ),
+            )
 
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxHeight()
-                        .weight(1f),
+                Modifier
+                    .fillMaxHeight()
+                    .weight(1f),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Bottom,
             ) {
@@ -260,16 +258,13 @@ private fun PlayerViewRight(
 }
 
 @Composable
-private fun PlayerImage(
-    roundedCorner: RoundedCornerShape,
-    player: PlayerData,
-) {
+private fun PlayerImage(roundedCorner: RoundedCornerShape, player: PlayerData) {
     CsTvAsyncImage(
         modifier =
-            Modifier
-                .clip(roundedCorner)
-                .fillMaxHeight()
-                .width(dimensionResource(id = R.dimen.player_image_width)),
+        Modifier
+            .clip(roundedCorner)
+            .fillMaxHeight()
+            .width(dimensionResource(id = R.dimen.player_image_width)),
         imageUrl = player.playerImage.getImage(PandaImage.ImageType.THUMBNAIL),
     )
 }
@@ -299,10 +294,10 @@ private fun MatchDetailsScreenLoadedPreview() {
     CsTvTheme(darkTheme = true) {
         MatchDetailsScreen(
             uiState =
-                MatchDetailsUiState(
-                    matchState = State.Loaded(stubMatch(111)),
-                    teamsState = State.Loaded(stubMatchDetailsTeamsData()),
-                ),
+            MatchDetailsUiState(
+                matchState = State.Loaded(stubMatch(111)),
+                teamsState = State.Loaded(stubMatchDetailsTeamsData()),
+            ),
         )
     }
 }
@@ -321,10 +316,10 @@ private fun MatchDetailsScreenErrorPreview() {
     CsTvTheme {
         MatchDetailsScreen(
             uiState =
-                MatchDetailsUiState(
-                    matchState = State.Error(R.string.match_detail_error_match_cannot_be_loaded),
-                    teamsState = State.Error(R.string.match_detail_error_team_cannot_be_loaded),
-                ),
+            MatchDetailsUiState(
+                matchState = State.Error(R.string.match_detail_error_match_cannot_be_loaded),
+                teamsState = State.Error(R.string.match_detail_error_team_cannot_be_loaded),
+            ),
         )
     }
 }
@@ -333,11 +328,13 @@ internal fun stubMatchDetailsTeamsData(): MatchDetailsTeamsData {
     return MatchDetailsTeamsData(team1 = stubTeamData(1), team2 = stubTeamData(2, 5))
 }
 
-internal fun stubTeamData(
-    id: Int,
-    size: Int = 10,
-) = TeamData(teamId = id, name = "Team Name $id", stubPlayersDataList(size))
+internal fun stubTeamData(id: Int, size: Int = 10) =
+    TeamData(teamId = id, name = "Team Name $id", stubPlayersDataList(size))
 
 internal fun stubPlayersDataList(size: Int) = List(size) { index -> stubPlayerData(index) }
 
-internal fun stubPlayerData(id: Int) = PlayerData(playerId = id, nickName = "NickName $id", name = "PlayerName PlayerLastName $id")
+internal fun stubPlayerData(id: Int) = PlayerData(
+    playerId = id,
+    nickName = "NickName $id",
+    name = "PlayerName PlayerLastName $id",
+)

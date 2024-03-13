@@ -22,22 +22,21 @@ internal class MatchRepositoryTest {
         }
 
     @Test
-    fun `when getMatches should make remote call and return PagingData`() =
-        runTest {
-            // Given
-            val matches = MatchListStub()
-            val pagingData = PagingData.from(matches.map { match -> match.toMatchData() })
-            val pagingDataFlow = flowOf(pagingData)
+    fun `when getMatches should make remote call and return PagingData`() = runTest {
+        // Given
+        val matches = MatchListStub()
+        val pagingData = PagingData.from(matches.map { match -> match.toMatchData() })
+        val pagingDataFlow = flowOf(pagingData)
 
-            coEvery { pagerMock.flow } returns pagingDataFlow
+        coEvery { pagerMock.flow } returns pagingDataFlow
 
-            // When
-            matchRepository.getMatches()
+        // When
+        matchRepository.getMatches()
 
-            // Then
-            pagerMock.flow.test {
-                assertEquals(pagingData, awaitItem())
-                awaitComplete()
-            }
+        // Then
+        pagerMock.flow.test {
+            assertEquals(pagingData, awaitItem())
+            awaitComplete()
         }
+    }
 }

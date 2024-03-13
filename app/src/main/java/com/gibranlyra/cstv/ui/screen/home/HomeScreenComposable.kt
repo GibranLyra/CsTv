@@ -20,10 +20,18 @@ import com.gibranlyra.cstv.ui.navigation.slideOutOfContainerTransition
 internal fun NavGraphBuilder.homeScreenComposable(
     navController: NavHostController,
     onToolbarComposition: (ToolbarData<Any>) -> Unit,
-    enterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = { slideInEnterTransition() },
-    exitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = { slideOutEnterTransition() },
-    popEnterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = { slideIntoTransition() },
-    popExitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = { slideOutOfContainerTransition() },
+    enterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = {
+        slideInEnterTransition()
+    },
+    exitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = {
+        slideOutEnterTransition()
+    },
+    popEnterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = {
+        slideIntoTransition()
+    },
+    popExitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = {
+        slideOutOfContainerTransition()
+    },
 ) {
     composable(
         route = Screen.Home.route,

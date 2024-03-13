@@ -42,70 +42,69 @@ internal enum class CsTvTextStyle {
 }
 
 @Composable
-internal fun CsTvTextStyle.toTextStyle(): TextStyle =
-    when (this) {
-        CsTvTextStyle.LARGE ->
-            TextStyle(
-                fontSize = 28.sp,
-                fontWeight = FontWeight.W700,
-                lineHeight = 32.sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-            )
+internal fun CsTvTextStyle.toTextStyle(): TextStyle = when (this) {
+    CsTvTextStyle.LARGE ->
+        TextStyle(
+            fontSize = 28.sp,
+            fontWeight = FontWeight.W700,
+            lineHeight = 32.sp,
+            color = MaterialTheme.colorScheme.onPrimary,
+        )
 
-        CsTvTextStyle.LARGE_SUBTLE ->
-            TextStyle(
-                fontSize = 22.sp,
-                fontWeight = FontWeight.W400,
-                lineHeight = 28.sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-            )
+    CsTvTextStyle.LARGE_SUBTLE ->
+        TextStyle(
+            fontSize = 22.sp,
+            fontWeight = FontWeight.W400,
+            lineHeight = 28.sp,
+            color = MaterialTheme.colorScheme.onPrimary,
+        )
 
-        CsTvTextStyle.BASE ->
-            TextStyle(
-                fontSize = 16.sp,
-                fontWeight = FontWeight.W700,
-                lineHeight = 24.sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-            )
+    CsTvTextStyle.BASE ->
+        TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.W700,
+            lineHeight = 24.sp,
+            color = MaterialTheme.colorScheme.onPrimary,
+        )
 
-        CsTvTextStyle.BASE_SUBTLE ->
-            TextStyle(
-                fontSize = 14.sp,
-                fontWeight = FontWeight.W400,
-                lineHeight = 20.sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-            )
+    CsTvTextStyle.BASE_SUBTLE ->
+        TextStyle(
+            fontSize = 14.sp,
+            fontWeight = FontWeight.W400,
+            lineHeight = 20.sp,
+            color = MaterialTheme.colorScheme.onPrimary,
+        )
 
-        CsTvTextStyle.SMALL ->
-            TextStyle(
-                fontSize = 14.sp,
-                fontWeight = FontWeight.W700,
-                lineHeight = 24.sp,
-                letterSpacing = (-0.2).sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-            )
+    CsTvTextStyle.SMALL ->
+        TextStyle(
+            fontSize = 14.sp,
+            fontWeight = FontWeight.W700,
+            lineHeight = 24.sp,
+            letterSpacing = (-0.2).sp,
+            color = MaterialTheme.colorScheme.onPrimary,
+        )
 
-        CsTvTextStyle.SMALL_SUBTLE ->
-            TextStyle(
-                fontSize = 12.sp,
-                fontWeight = FontWeight.W400,
-                lineHeight = 20.sp,
-                letterSpacing = (-0.2).sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-            )
+    CsTvTextStyle.SMALL_SUBTLE ->
+        TextStyle(
+            fontSize = 12.sp,
+            fontWeight = FontWeight.W400,
+            lineHeight = 20.sp,
+            letterSpacing = (-0.2).sp,
+            color = MaterialTheme.colorScheme.onPrimary,
+        )
 
-        CsTvTextStyle.X_SMALL ->
-            TextStyle(
-                fontSize = 10.sp,
-                fontWeight = FontWeight.W700,
-                lineHeight = 16.sp,
-            )
+    CsTvTextStyle.X_SMALL ->
+        TextStyle(
+            fontSize = 10.sp,
+            fontWeight = FontWeight.W700,
+            lineHeight = 16.sp,
+        )
 
-        CsTvTextStyle.X_SMALL_SUBTLE ->
-            TextStyle(
-                fontSize = 10.sp,
-                fontWeight = FontWeight.W400,
-                lineHeight = 10.sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-            )
-    }
+    CsTvTextStyle.X_SMALL_SUBTLE ->
+        TextStyle(
+            fontSize = 10.sp,
+            fontWeight = FontWeight.W400,
+            lineHeight = 10.sp,
+            color = MaterialTheme.colorScheme.onPrimary,
+        )
+}

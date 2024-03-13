@@ -7,30 +7,29 @@ import com.gibranlyra.cstv.data.ext.toMatchData
 import com.gibranlyra.cstv.domain.model.MatchData
 import com.gibranlyra.cstv.stub.MatchListStub
 import com.gibranlyra.cstv.ui.screen.home.HomeUiState
-import kotlinx.coroutines.flow.flowOf
 import java.io.IOException
+import kotlinx.coroutines.flow.flowOf
 
 internal class HomeScreenTestData {
     fun getLoadingState(): HomeUiState = HomeUiState()
 
-    fun getLoadedState(match: List<MatchData>): HomeUiState = HomeUiState(flowOf(PagingData.from(data = match)))
+    fun getLoadedState(match: List<MatchData>): HomeUiState =
+        HomeUiState(flowOf(PagingData.from(data = match)))
 
-    fun getErrorState(): HomeUiState =
-        HomeUiState(
-            flowOf(
-                PagingData.from(
-                    data = listOf(),
-                    sourceLoadStates = getErrorLoadState(),
-                ),
+    fun getErrorState(): HomeUiState = HomeUiState(
+        flowOf(
+            PagingData.from(
+                data = listOf(),
+                sourceLoadStates = getErrorLoadState(),
             ),
-        )
+        ),
+    )
 
     fun getMatches() = MatchListStub().map { it.toMatchData() }
 
-    private fun getErrorLoadState() =
-        LoadStates(
-            refresh = LoadState.Error(IOException("Error")),
-            append = LoadState.NotLoading(true),
-            prepend = LoadState.NotLoading(true),
-        )
+    private fun getErrorLoadState() = LoadStates(
+        refresh = LoadState.Error(IOException("Error")),
+        append = LoadState.NotLoading(true),
+        prepend = LoadState.NotLoading(true),
+    )
 }

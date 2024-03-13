@@ -48,12 +48,12 @@ internal fun MatchItem(
 
     Column(
         modifier =
-            modifier
-                .height(dimensionResource(id = R.dimen.match_container_height))
-                .clip(roundedCorner)
-                .clickable(onClick = { onClick(match) })
-                .background(colorScheme.primary)
-                .fillMaxWidth(),
+        modifier
+            .height(dimensionResource(id = R.dimen.match_container_height))
+            .clip(roundedCorner)
+            .clickable(onClick = { onClick(match) })
+            .background(colorScheme.primary)
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
@@ -61,21 +61,24 @@ internal fun MatchItem(
             when (match.matchStatus) {
                 MatchStatus.RUNNING -> stringResource(id = R.string.live_match)
                 MatchStatus.FINISHED -> stringResource(id = R.string.finished_match, match.beginAt)
-                MatchStatus.NOT_STARTED -> stringResource(id = R.string.scheduled_match, match.beginAt)
+                MatchStatus.NOT_STARTED -> stringResource(
+                    id = R.string.scheduled_match,
+                    match.beginAt,
+                )
             }
 
         CsTvText(
             modifier =
-                Modifier
-                    .align(Alignment.End)
-                    .clip(
-                        RoundedCornerShape(
-                            bottomStart = dimensionResource(R.dimen.padding_xlarge),
-                            topEnd = dimensionResource(R.dimen.padding_large),
-                        ),
-                    )
-                    .background(getStickerBackground(match.matchStatus, colorScheme.secondary))
-                    .padding(dimensionResource(id = R.dimen.padding_medium)),
+            Modifier
+                .align(Alignment.End)
+                .clip(
+                    RoundedCornerShape(
+                        bottomStart = dimensionResource(R.dimen.padding_xlarge),
+                        topEnd = dimensionResource(R.dimen.padding_large),
+                    ),
+                )
+                .background(getStickerBackground(match.matchStatus, colorScheme.secondary))
+                .padding(dimensionResource(id = R.dimen.padding_medium)),
             text = stickerText,
             style = CsTvTextStyle.BASE_SUBTLE,
             styleOverride = getStickerTextStyle(match.matchStatus),
@@ -83,8 +86,8 @@ internal fun MatchItem(
 
         Row(
             modifier =
-                Modifier
-                    .weight(5f),
+            Modifier
+                .weight(5f),
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -98,9 +101,9 @@ internal fun MatchItem(
 
             Spacer(
                 modifier =
-                    Modifier
-                        .fillMaxHeight()
-                        .width(dimensionResource(id = R.dimen.padding_medium)),
+                Modifier
+                    .fillMaxHeight()
+                    .width(dimensionResource(id = R.dimen.padding_medium)),
             )
             CsTvText(
                 text = stringResource(id = R.string.versus),
@@ -110,9 +113,9 @@ internal fun MatchItem(
 
             Spacer(
                 modifier =
-                    Modifier
-                        .fillMaxHeight()
-                        .width(dimensionResource(id = R.dimen.padding_medium)),
+                Modifier
+                    .fillMaxHeight()
+                    .width(dimensionResource(id = R.dimen.padding_medium)),
             )
 
             TeamView(
@@ -130,14 +133,16 @@ internal fun MatchItem(
 
         Row(
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
+            Modifier
+                .fillMaxWidth()
+                .weight(1f),
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             CsTvAsyncImage(
-                modifier = Modifier.size(dimensionResource(id = R.dimen.league_thumbnail_image_size)),
+                modifier = Modifier.size(
+                    dimensionResource(id = R.dimen.league_thumbnail_image_size),
+                ),
                 imageUrl = match.leagueImageUrl,
             )
             CsTvText(
@@ -149,17 +154,13 @@ internal fun MatchItem(
 }
 
 @Composable
-fun getStickerTextStyle(matchStatus: MatchStatus) =
-    when (matchStatus) {
-        MatchStatus.RUNNING -> TextStyle(color = colorScheme.onError)
-        MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> TextStyle(color = colorScheme.onSecondary)
-    }
+fun getStickerTextStyle(matchStatus: MatchStatus) = when (matchStatus) {
+    MatchStatus.RUNNING -> TextStyle(color = colorScheme.onError)
+    MatchStatus.FINISHED, MatchStatus.NOT_STARTED -> TextStyle(color = colorScheme.onSecondary)
+}
 
 @Composable
-fun getStickerBackground(
-    matchStatus: MatchStatus,
-    startColor: Color,
-): Color {
+fun getStickerBackground(matchStatus: MatchStatus, startColor: Color): Color {
     val colorScheme = MaterialTheme.colorScheme
 
     return when (matchStatus) {
@@ -169,10 +170,10 @@ fun getStickerBackground(
                 color.animateTo(
                     targetValue = colorScheme.errorContainer,
                     animationSpec =
-                        infiniteRepeatable(
-                            animation = tween(1000),
-                            repeatMode = RepeatMode.Reverse,
-                        ),
+                    infiniteRepeatable(
+                        animation = tween(1000),
+                        repeatMode = RepeatMode.Reverse,
+                    ),
                 )
             }
             color.value
@@ -206,14 +207,13 @@ internal fun MatchItemPreviewFinished() {
     }
 }
 
-internal fun stubMatch(id: Int) =
-    MatchData(
-        id = id,
-        team1Name = "Really Really long team name $id",
-        team2Name = "name 2 $id",
-        leagueImageUrl = "",
-        matchStatus = MatchStatus.RUNNING,
-        beginAt = "beginAt",
-        leagueName = "League name",
-        serieName = "Serie name",
-    )
+internal fun stubMatch(id: Int) = MatchData(
+    id = id,
+    team1Name = "Really Really long team name $id",
+    team2Name = "name 2 $id",
+    leagueImageUrl = "",
+    matchStatus = MatchStatus.RUNNING,
+    beginAt = "beginAt",
+    leagueName = "League name",
+    serieName = "Serie name",
+)

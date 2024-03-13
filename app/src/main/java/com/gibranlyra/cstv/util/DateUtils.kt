@@ -23,10 +23,8 @@ fun convertToLocalDateTime(utcString: String): String {
     }
 }
 
-private fun isToday(
-    currentBrazilTime: ZonedDateTime,
-    brazilDateTime: ZonedDateTime,
-) = currentBrazilTime.dayOfYear == brazilDateTime.dayOfYear
+private fun isToday(currentBrazilTime: ZonedDateTime, brazilDateTime: ZonedDateTime) =
+    currentBrazilTime.dayOfYear == brazilDateTime.dayOfYear
 
 fun getCurrentDateTime(plusDays: Long = 0): String {
     val currentUtcDateTime = LocalDate.now(ZoneOffset.UTC).plusDays(plusDays)

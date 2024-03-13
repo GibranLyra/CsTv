@@ -32,8 +32,8 @@ import com.gibranlyra.cstv.ui.component.MatchItem
 import com.gibranlyra.cstv.ui.component.RetryButton
 import com.gibranlyra.cstv.ui.component.stubMatch
 import com.gibranlyra.cstv.ui.theme.CsTvTheme
-import kotlinx.coroutines.flow.flowOf
 import java.io.IOException
+import kotlinx.coroutines.flow.flowOf
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -84,9 +84,9 @@ private fun MatchesList(
 
     LazyColumn(
         modifier =
-            modifier
-                .fillMaxSize()
-                .padding(horizontal = dimensionResource(R.dimen.padding_large)),
+        modifier
+            .fillMaxSize()
+            .padding(horizontal = dimensionResource(R.dimen.padding_large)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
         contentPadding = PaddingValues(vertical = dimensionResource(R.dimen.padding_large)),
     ) {
@@ -137,10 +137,7 @@ private fun HomeLoadingView(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun HomeErrorView(
-    modifier: Modifier = Modifier,
-    onRetryButtonClicked: () -> Unit,
-) {
+fun HomeErrorView(modifier: Modifier = Modifier, onRetryButtonClicked: () -> Unit) {
     Column(modifier = modifier) {
         RetryButton<Nothing>(
             message = stringResource(id = R.string.home_screen_error),
@@ -156,11 +153,11 @@ internal fun HomePreview() {
             PagingData.from(
                 data = stubMatches(),
                 sourceLoadStates =
-                    LoadStates(
-                        refresh = LoadState.NotLoading(true),
-                        append = LoadState.NotLoading(true),
-                        prepend = LoadState.NotLoading(true),
-                    ),
+                LoadStates(
+                    refresh = LoadState.NotLoading(true),
+                    append = LoadState.NotLoading(true),
+                    prepend = LoadState.NotLoading(true),
+                ),
             )
         HomeScreen(
             HomeUiState(flowOf(successPagingData)),
@@ -184,11 +181,11 @@ internal fun HomeErrorPreview() {
             PagingData.from(
                 data = listOf<MatchData>(),
                 sourceLoadStates =
-                    LoadStates(
-                        refresh = LoadState.Error(IOException("Error")),
-                        append = LoadState.NotLoading(true),
-                        prepend = LoadState.NotLoading(true),
-                    ),
+                LoadStates(
+                    refresh = LoadState.Error(IOException("Error")),
+                    append = LoadState.NotLoading(true),
+                    prepend = LoadState.NotLoading(true),
+                ),
             )
         HomeScreen(
             HomeUiState(flowOf(errorPagingData)),

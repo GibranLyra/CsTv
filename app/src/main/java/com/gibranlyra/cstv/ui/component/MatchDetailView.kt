@@ -27,29 +27,28 @@ import com.gibranlyra.cstv.domain.model.MatchData
 import com.gibranlyra.cstv.ui.theme.CsTvTheme
 
 @Composable
-internal fun MatchDetailView(
-    match: MatchData,
-    modifier: Modifier = Modifier,
-) {
+internal fun MatchDetailView(match: MatchData, modifier: Modifier = Modifier) {
     val roundedCorner = RoundedCornerShape(dimensionResource(R.dimen.padding_large))
     val stickerText = getStickerText(match)
 
     Column(
         modifier =
-            modifier
-                .height(dimensionResource(id = R.dimen.match_details_container_height))
-                .clip(roundedCorner)
-                .background(colorScheme.background)
-                .fillMaxSize(),
+        modifier
+            .height(dimensionResource(id = R.dimen.match_details_container_height))
+            .clip(roundedCorner)
+            .background(colorScheme.background)
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
         Column {
             Row(
                 modifier =
-                    Modifier
-                        .weight(5f),
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
+                Modifier
+                    .weight(5f),
+                horizontalArrangement = Arrangement.spacedBy(
+                    dimensionResource(R.dimen.padding_medium),
+                ),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 TeamView(
@@ -62,9 +61,9 @@ internal fun MatchDetailView(
 
                 Spacer(
                     modifier =
-                        Modifier
-                            .fillMaxHeight()
-                            .width(dimensionResource(id = R.dimen.padding_medium)),
+                    Modifier
+                        .fillMaxHeight()
+                        .width(dimensionResource(id = R.dimen.padding_medium)),
                 )
                 CsTvText(
                     text = stringResource(id = R.string.versus),
@@ -74,9 +73,9 @@ internal fun MatchDetailView(
 
                 Spacer(
                     modifier =
-                        Modifier
-                            .fillMaxHeight()
-                            .width(dimensionResource(id = R.dimen.padding_medium)),
+                    Modifier
+                        .fillMaxHeight()
+                        .width(dimensionResource(id = R.dimen.padding_medium)),
                 )
 
                 TeamView(
@@ -90,11 +89,11 @@ internal fun MatchDetailView(
 
             CsTvText(
                 modifier =
-                    Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .clip(roundedCorner)
-                        .background(getStickerBackground(match.matchStatus, colorScheme.background))
-                        .padding(dimensionResource(id = R.dimen.padding_medium)),
+                Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .clip(roundedCorner)
+                    .background(getStickerBackground(match.matchStatus, colorScheme.background))
+                    .padding(dimensionResource(id = R.dimen.padding_medium)),
                 text = stickerText,
                 style = CsTvTextStyle.BASE_SUBTLE,
                 styleOverride = getStickerTextStyle(match.matchStatus),
@@ -104,16 +103,15 @@ internal fun MatchDetailView(
 }
 
 @Composable
-private fun getStickerText(match: MatchData) =
-    when (match.matchStatus) {
-        MatchStatus.RUNNING -> stringResource(id = R.string.live_match)
-        MatchStatus.FINISHED -> stringResource(id = R.string.finished_match, match.beginAt)
-        MatchStatus.NOT_STARTED ->
-            stringResource(
-                id = R.string.scheduled_match,
-                match.beginAt,
-            )
-    }
+private fun getStickerText(match: MatchData) = when (match.matchStatus) {
+    MatchStatus.RUNNING -> stringResource(id = R.string.live_match)
+    MatchStatus.FINISHED -> stringResource(id = R.string.finished_match, match.beginAt)
+    MatchStatus.NOT_STARTED ->
+        stringResource(
+            id = R.string.scheduled_match,
+            match.beginAt,
+        )
+}
 
 @Preview
 @Composable
