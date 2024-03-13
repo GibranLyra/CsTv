@@ -18,7 +18,7 @@ internal fun CsTvAsyncImage(
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
     placeholder: Painter = painterResource(id = R.drawable.ic_launcher_foreground),
-    contentScale: ContentScale = ContentScale.Fit,
+    contentScale: ContentScale = ContentScale.Fit
 ) {
     if (imageUrl.isNotEmpty()) {
         val request =
