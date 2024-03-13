@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
@@ -88,9 +88,9 @@ internal fun MatchItem(
             TeamView(
                 teamImage = match.team1Image,
                 teamName = match.team1Name,
-                modifier = Modifier.weight(2f),
                 horizontalAlignment = Alignment.End,
-                textAlign = TextAlign.End
+                textAlign = TextAlign.End,
+                modifier = Modifier.weight(2f)
             )
 
             Spacer(
@@ -113,15 +113,15 @@ internal fun MatchItem(
             TeamView(
                 teamImage = match.team2Image,
                 teamName = match.team2Name,
-                modifier = Modifier.weight(2f),
                 horizontalAlignment = Alignment.Start,
-                textAlign = TextAlign.Start
+                textAlign = TextAlign.Start,
+                modifier = Modifier.weight(2f)
             )
         }
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_medium)))
 
-        Divider(thickness = 1.dp)
+        HorizontalDivider(thickness = 1.dp)
 
         Row(
             modifier = Modifier

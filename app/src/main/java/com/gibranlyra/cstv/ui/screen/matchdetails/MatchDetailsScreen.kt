@@ -94,7 +94,7 @@ private fun MatchDetailsScreenTeamsLoaded(
     teamsData: MatchDetailsTeamsData,
     modifier: Modifier = Modifier
 ) {
-    PlayersPanelView(modifier, teamsData)
+    PlayersPanelView(teamsData = teamsData, modifier = modifier)
 }
 
 @Composable
@@ -108,18 +108,17 @@ fun MatchScreenMatchError(modifier: Modifier = Modifier) {
 @Composable
 fun MatchScreenTeamsError(modifier: Modifier = Modifier, onRetryClick: (Int) -> Unit) {
     RetryButton<Int>(
-        modifier = modifier,
         message = stringResource(id = R.string.match_detail_error_team_cannot_be_loaded),
-        onClick = { teamId ->
-            teamId?.let { onRetryClick.invoke(teamId) }
-        }
-    )
+        modifier = modifier
+    ) { teamId ->
+        teamId?.let { onRetryClick.invoke(teamId) }
+    }
 }
 
 @Composable
 private fun PlayersPanelView(
-    modifier: Modifier,
-    teamsData: MatchDetailsTeamsData
+    teamsData: MatchDetailsTeamsData,
+    modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier

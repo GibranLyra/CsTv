@@ -61,6 +61,7 @@ android {
         }
     }
 
+    @Suppress("UnstableApiUsage")
     testOptions {
         unitTests.isIncludeAndroidResources = true
         unitTests.isReturnDefaultValues = true
@@ -110,6 +111,7 @@ dependencies {
     implementation(libs.kotlin.serialization)
     implementation(libs.kotlin.serialization.json)
     implementation(libs.kotlin.serialization.converter)
+    lintChecks(libs.compose.lint.checks)
 }
 
 kapt {

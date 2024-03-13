@@ -53,9 +53,9 @@ internal fun MatchDetailView(
                 TeamView(
                     teamImage = match.team1Image,
                     teamName = match.team1Name,
-                    modifier = Modifier.weight(2f),
                     horizontalAlignment = Alignment.End,
-                    textAlign = TextAlign.End
+                    textAlign = TextAlign.End,
+                    modifier = Modifier.weight(2f)
                 )
 
                 Spacer(
@@ -78,9 +78,9 @@ internal fun MatchDetailView(
                 TeamView(
                     teamImage = match.team2Image,
                     teamName = match.team2Name,
-                    modifier = Modifier.weight(2f),
                     horizontalAlignment = Alignment.Start,
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
+                    modifier = Modifier.weight(2f)
                 )
             }
 

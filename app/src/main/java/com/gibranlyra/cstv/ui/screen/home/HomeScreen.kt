@@ -57,7 +57,12 @@ internal fun HomeScreen(
             .testTag(REFRESH_MATCHES_TEST_TAG)
             .pullRefresh(pullRefreshState)
     ) {
-        MatchesList(modifier, uiState, onMatchClicked, onRetryButtonClicked)
+        MatchesList(
+            uiState = uiState,
+            modifier = modifier,
+            onMatchClicked = onMatchClicked,
+            onRetryButtonClicked = onRetryButtonClicked
+        )
 
         PullRefreshIndicator(
             uiState.isMatchRefreshing.isRefreshing,
@@ -70,10 +75,10 @@ internal fun HomeScreen(
 
 @Composable
 private fun MatchesList(
-    modifier: Modifier,
     uiState: HomeUiState,
     onMatchClicked: (MatchData) -> Unit,
-    onRetryButtonClicked: () -> Unit
+    onRetryButtonClicked: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val matches = uiState.matchesPagingState.collectAsLazyPagingItems()
 
@@ -134,8 +139,8 @@ private fun HomeLoadingView(modifier: Modifier = Modifier) {
 fun HomeErrorView(modifier: Modifier = Modifier, onRetryButtonClicked: () -> Unit) {
     Column(modifier = modifier) {
         RetryButton<Nothing>(
-            message = stringResource(id = R.string.home_screen_error),
-            onClick = { onRetryButtonClicked.invoke() })
+            message = stringResource(id = R.string.home_screen_error)
+        ) { onRetryButtonClicked.invoke() }
     }
 }
 

@@ -1,7 +1,7 @@
 package com.gibranlyra.cstv.ui.component
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -43,7 +43,7 @@ fun CenteredTopBar(
                     onClick = navigateUp
                 ) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = stringResource(R.string.back_button),
                         tint = MaterialTheme.colorScheme.onPrimary,
                     )
@@ -55,7 +55,7 @@ fun CenteredTopBar(
 
 @Preview(showBackground = true)
 @Composable
-fun CenteredTopBarPreview() {
+private fun CenteredTopBarPreview() {
     CsTvTheme {
         SimpleTopBar(
             title = "Simple TopBar",

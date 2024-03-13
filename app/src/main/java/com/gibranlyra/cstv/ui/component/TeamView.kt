@@ -20,9 +20,9 @@ import com.gibranlyra.cstv.ui.theme.CsTvTheme
 fun TeamView(
     teamImage: PandaImage,
     teamName: String,
-    modifier: Modifier = Modifier,
     horizontalAlignment: Alignment.Horizontal,
-    textAlign: TextAlign
+    textAlign: TextAlign,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
@@ -53,11 +53,11 @@ internal fun TeamViewPreview() {
     val match = stubMatch(1)
     CsTvTheme {
         TeamView(
-            modifier = Modifier.height(200.dp),
             teamImage = match.team1Image,
             teamName = match.team1Name,
             horizontalAlignment = Alignment.CenterHorizontally,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            modifier = Modifier.height(200.dp)
         )
     }
 }

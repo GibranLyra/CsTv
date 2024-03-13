@@ -18,9 +18,9 @@ internal const val RETRY_BUTTON_TEST_TAG = "RETRY_BUTTON_TEST_TAG"
 
 @Composable
 internal fun <T> RetryButton(
+    message: String,
     modifier: Modifier = Modifier,
     data: T? = null,
-    message: String,
     onClick: (T?) -> Unit = {}
 ) {
     Column(
