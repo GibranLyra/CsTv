@@ -1,6 +1,5 @@
 package com.gibranlyra.cstv.data.entity
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,5 +12,5 @@ data class VideogameTitle(
     @SerialName("slug")
     val slug: String = "",
     @SerialName("videogame_id")
-    val videogameId: Int = 0
+    val videogameId: Int = 0,
 )

@@ -44,8 +44,8 @@ internal fun CsTvApp(navController: NavHostController = rememberNavController())
                 navController = navController,
                 onToolbarComposition = { toolbarData = it },
                 modifier = Modifier.padding(innerPadding),
-                startDestination = startDestination.route
+                startDestination = startDestination.route,
             )
-        }
+        },
     )
 }

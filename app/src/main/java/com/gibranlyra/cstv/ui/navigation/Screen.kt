@@ -10,9 +10,10 @@ internal enum class ScreenType(val screen: Screen) {
 
 internal sealed class Screen(val route: String, val appTopBar: AppTopBar) {
     data object Home : Screen(route = ScreenType.HOME.name, appTopBar = AppTopBar.SIMPLE)
+
     data object MatchDetails : Screen(
         route = ScreenType.MATCH_DETAILS.name,
-        appTopBar = AppTopBar.CENTERED
+        appTopBar = AppTopBar.CENTERED,
     ) {
         const val matchIdArg = "matchId"
 
@@ -20,5 +21,4 @@ internal sealed class Screen(val route: String, val appTopBar: AppTopBar) {
 
         val arguments = listOf(navArgument(matchIdArg) { type = NavType.IntType })
     }
-
 }

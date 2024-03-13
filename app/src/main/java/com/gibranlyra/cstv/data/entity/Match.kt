@@ -1,6 +1,5 @@
 package com.gibranlyra.cstv.data.entity
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -71,5 +70,5 @@ data class Match(
     @SerialName("winner_id")
     val winnerId: String? = null,
     @SerialName("winner_type")
-    val winnerType: String = ""
+    val winnerType: String = "",
 )

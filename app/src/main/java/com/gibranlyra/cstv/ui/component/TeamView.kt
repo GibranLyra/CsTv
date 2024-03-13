@@ -25,15 +25,17 @@ fun TeamView(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
-            .padding(vertical = dimensionResource(id = R.dimen.padding_medium)),
-        horizontalAlignment = horizontalAlignment
+        modifier =
+            modifier
+                .padding(vertical = dimensionResource(id = R.dimen.padding_medium)),
+        horizontalAlignment = horizontalAlignment,
     ) {
         CsTvAsyncImage(
             imageUrl = teamImage.getImage(PandaImage.ImageType.THUMBNAIL),
-            modifier = Modifier
-                .size(dimensionResource(id = R.dimen.large_match_team_image_width))
-                .weight(2f),
+            modifier =
+                Modifier
+                    .size(dimensionResource(id = R.dimen.large_match_team_image_width))
+                    .weight(2f),
         )
 
         CsTvText(
@@ -42,7 +44,7 @@ fun TeamView(
             text = teamName,
             overflow = TextOverflow.Ellipsis,
             maxLines = 2,
-            style = CsTvTextStyle.BASE_SUBTLE
+            style = CsTvTextStyle.BASE_SUBTLE,
         )
     }
 }
@@ -57,7 +59,7 @@ internal fun TeamViewPreview() {
             teamName = match.team1Name,
             horizontalAlignment = Alignment.CenterHorizontally,
             textAlign = TextAlign.Center,
-            modifier = Modifier.height(200.dp)
+            modifier = Modifier.height(200.dp),
         )
     }
 }

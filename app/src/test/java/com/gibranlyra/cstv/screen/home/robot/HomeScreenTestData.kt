@@ -13,23 +13,24 @@ import java.io.IOException
 internal class HomeScreenTestData {
     fun getLoadingState(): HomeUiState = HomeUiState()
 
-    fun getLoadedState(match: List<MatchData>): HomeUiState =
-        HomeUiState(flowOf(PagingData.from(data = match)))
+    fun getLoadedState(match: List<MatchData>): HomeUiState = HomeUiState(flowOf(PagingData.from(data = match)))
 
-    fun getErrorState(): HomeUiState = HomeUiState(
-        flowOf(
-            PagingData.from(
-                data = listOf(),
-                sourceLoadStates = getErrorLoadState()
-            )
+    fun getErrorState(): HomeUiState =
+        HomeUiState(
+            flowOf(
+                PagingData.from(
+                    data = listOf(),
+                    sourceLoadStates = getErrorLoadState(),
+                ),
+            ),
         )
-    )
 
     fun getMatches() = MatchListStub().map { it.toMatchData() }
 
-    private fun getErrorLoadState() = LoadStates(
-        refresh = LoadState.Error(IOException("Error")),
-        append = LoadState.NotLoading(true),
-        prepend = LoadState.NotLoading(true),
-    )
+    private fun getErrorLoadState() =
+        LoadStates(
+            refresh = LoadState.Error(IOException("Error")),
+            append = LoadState.NotLoading(true),
+            prepend = LoadState.NotLoading(true),
+        )
 }

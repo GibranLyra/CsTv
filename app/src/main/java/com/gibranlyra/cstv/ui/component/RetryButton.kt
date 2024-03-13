@@ -21,23 +21,22 @@ internal fun <T> RetryButton(
     message: String,
     modifier: Modifier = Modifier,
     data: T? = null,
-    onClick: (T?) -> Unit = {}
+    onClick: (T?) -> Unit = {},
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
         CsTvText(
             text = message,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
 
         Button(modifier = Modifier.testTag(RETRY_BUTTON_TEST_TAG), onClick = { onClick(data) }) {
             CsTvText(
                 text = stringResource(id = R.string.retry),
-                style = CsTvTextStyle.BASE_SUBTLE
+                style = CsTvTextStyle.BASE_SUBTLE,
             )
         }
     }

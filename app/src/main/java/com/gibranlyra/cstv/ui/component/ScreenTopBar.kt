@@ -11,14 +11,14 @@ internal fun ScreenTopBar(
     navController: NavHostController,
     screen: Screen,
     toolbarData: ToolbarData<*>,
-    navigateUp: () -> Unit = { navController.navigateUp() }
+    navigateUp: () -> Unit = { navController.navigateUp() },
 ) {
     when (screen.appTopBar) {
         AppTopBar.SIMPLE -> {
             SimpleTopBar(
                 title = toolbarData.title,
                 canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = navigateUp
+                navigateUp = navigateUp,
             )
         }
 
@@ -26,7 +26,7 @@ internal fun ScreenTopBar(
             CenteredTopBar(
                 title = toolbarData.title,
                 canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = navigateUp
+                navigateUp = navigateUp,
             )
         }
     }

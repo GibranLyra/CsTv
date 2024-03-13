@@ -18,15 +18,13 @@ const val PAGE_SIZE = 20
 @Module
 @InstallIn(SingletonComponent::class)
 internal object PagerModule {
-
     @MatchPager
     @Provides
     fun provideMatchPager(
         config: PagingConfig,
-        pagingSource: MatchPagingSource
+        pagingSource: MatchPagingSource,
     ): Pager<Int, MatchData> = Pager(config = config, pagingSourceFactory = { pagingSource })
 
     @Provides
     fun providePagingConfig(): PagingConfig = PagingConfig(pageSize = PAGE_SIZE)
-
 }

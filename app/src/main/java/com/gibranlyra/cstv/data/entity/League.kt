@@ -1,6 +1,5 @@
 package com.gibranlyra.cstv.data.entity
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,5 +16,5 @@ data class League(
     @SerialName("slug")
     val slug: String = "",
     @SerialName("url")
-    val url: String? = ""
+    val url: String? = "",
 )

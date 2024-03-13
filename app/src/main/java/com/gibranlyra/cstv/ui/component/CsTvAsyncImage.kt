@@ -21,9 +21,10 @@ internal fun CsTvAsyncImage(
     contentScale: ContentScale = ContentScale.Fit,
 ) {
     if (imageUrl.isNotEmpty()) {
-        val request = ImageRequest.Builder(LocalContext.current)
-            .data(imageUrl)
-            .memoryCachePolicy(CachePolicy.ENABLED)
+        val request =
+            ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .memoryCachePolicy(CachePolicy.ENABLED)
 
         AsyncImage(
             modifier = modifier,

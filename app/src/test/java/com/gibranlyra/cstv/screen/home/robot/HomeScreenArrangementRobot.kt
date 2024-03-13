@@ -20,7 +20,7 @@ internal class HomeScreenArrangementRobot(private val rule: ComposeContentTestRu
                 uiState = uiState,
                 onMatchClicked = onMatchClicked,
                 onRetryButtonClicked = onRetryButtonClicked,
-                onRefreshMatches = onRefreshMatches
+                onRefreshMatches = onRefreshMatches,
             )
         }
     }
@@ -32,5 +32,4 @@ internal class HomeScreenArrangementRobot(private val rule: ComposeContentTestRu
     }
 }
 
-internal fun HomeScreenKtTest.arrange(block: HomeScreenArrangementRobot.() -> Unit) =
-    robotFactory.arrangementRobot.apply(block)
+internal fun HomeScreenKtTest.arrange(block: HomeScreenArrangementRobot.() -> Unit) = robotFactory.arrangementRobot.apply(block)

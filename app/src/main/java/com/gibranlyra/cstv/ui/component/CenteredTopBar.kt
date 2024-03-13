@@ -32,7 +32,7 @@ fun CenteredTopBar(
                 modifier = Modifier,
                 text = title,
                 style = CsTvTextStyle.BASE,
-                styleOverride = TextStyle(color = MaterialTheme.colorScheme.onPrimary)
+                styleOverride = TextStyle(color = MaterialTheme.colorScheme.onPrimary),
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(Color.Transparent),
@@ -40,7 +40,7 @@ fun CenteredTopBar(
             if (canNavigateBack) {
                 IconButton(
                     modifier = Modifier,
-                    onClick = navigateUp
+                    onClick = navigateUp,
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -49,7 +49,7 @@ fun CenteredTopBar(
                     )
                 }
             }
-        }
+        },
     )
 }
 
@@ -60,7 +60,7 @@ private fun CenteredTopBarPreview() {
         SimpleTopBar(
             title = "Simple TopBar",
             canNavigateBack = true,
-            navigateUp = {}
+            navigateUp = {},
         )
     }
 }

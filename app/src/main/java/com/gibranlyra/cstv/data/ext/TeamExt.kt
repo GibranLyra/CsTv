@@ -10,6 +10,6 @@ fun Team.toTeamData(): TeamData {
         teamId = id,
         name = name,
         players = players,
-        teamImage = PandaImage(imageUrl.orEmpty())
+        teamImage = PandaImage(imageUrl.orEmpty()),
     )
 }

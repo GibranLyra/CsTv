@@ -15,13 +15,15 @@ internal class HomeScreenAssertionRobot(
     private val rule: ComposeContentTestRule,
     private val testUtils: HomeScreenTestUtils,
 ) {
-    fun textIsDisplayed(text: String) = apply {
-        rule.onNodeWithText(text).assertIsDisplayed()
-    }
+    fun textIsDisplayed(text: String) =
+        apply {
+            rule.onNodeWithText(text).assertIsDisplayed()
+        }
 
-    fun tagIsDisplayed(tag: String) = apply {
-        rule.onNodeWithTag(tag).assertIsDisplayed()
-    }
+    fun tagIsDisplayed(tag: String) =
+        apply {
+            rule.onNodeWithTag(tag).assertIsDisplayed()
+        }
 
     fun loadingIsDisplayed() {
         rule.onNodeWithTag(HOME_CIRCULAR_LOADING_TEST_TAG)
@@ -41,6 +43,4 @@ internal class HomeScreenAssertionRobot(
     }
 }
 
-internal fun HomeScreenKtTest.assert(
-    block: HomeScreenAssertionRobot.() -> Unit
-) = robotFactory.assertionRobot.apply(block)
+internal fun HomeScreenKtTest.assert(block: HomeScreenAssertionRobot.() -> Unit) = robotFactory.assertionRobot.apply(block)

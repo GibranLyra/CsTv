@@ -27,6 +27,7 @@ roboletric = "4.11.1"
 threetenbp = "1.6.0"
 pulltorefresh = "1.6.3"
 core-splashscreen = "1.0.1"
+ktlint = "12.1.0"
 
 [libraries]
 compose-lint-checks = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "compose-lint-checks" }
@@ -89,6 +90,7 @@ com-google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", versio
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin-parcelize-plugin" }
 kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-android" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 
 [bundles]
 coil = ["coil-kt", "coil-kt-compose"]

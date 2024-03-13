@@ -5,9 +5,8 @@ plugins {
     alias(libs.plugins.com.google.dagger.hilt.android)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.kapt)
-
     alias(libs.plugins.kotlin.plugin.serialization)
-
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -30,7 +29,6 @@ android {
             useSupportLibrary = true
         }
         buildConfigField("String", "TOKEN", "\"v_A9LyMTewYfR66oruNnPvKovpglfhwE26arqnzFvGI9-YqqPGE\"")
-
     }
 
     buildTypes {
@@ -38,7 +36,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }

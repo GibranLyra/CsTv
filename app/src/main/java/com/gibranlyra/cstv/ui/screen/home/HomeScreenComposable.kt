@@ -49,7 +49,7 @@ internal fun NavGraphBuilder.homeScreenComposable(
                 homeViewModel.navigateToMatchDetailsScreen(
                     match.id,
                     match.team1Id,
-                    match.team2Id
+                    match.team2Id,
                 )
             },
         )

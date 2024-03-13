@@ -12,14 +12,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 internal class ApiServiceModule {
+    @Provides
+    @Singleton
+    fun provideMatchApiService(retrofit: Retrofit): MatchApi = retrofit.create(MatchApi::class.java)
 
     @Provides
     @Singleton
-    fun provideMatchApiService(retrofit: Retrofit): MatchApi =
-        retrofit.create(MatchApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideTeamApiService(retrofit: Retrofit): TeamApi =
-        retrofit.create(TeamApi::class.java)
+    fun provideTeamApiService(retrofit: Retrofit): TeamApi = retrofit.create(TeamApi::class.java)
 }

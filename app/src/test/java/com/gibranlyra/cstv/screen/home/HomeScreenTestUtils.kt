@@ -8,6 +8,7 @@ internal class HomeScreenTestUtils {
     var matchesRefreshed = false
 
     fun onMatchClicked(): (MatchData) -> Unit = { match -> matchClicked = match }
+
     fun onRetryButtonClicked(): () -> Unit = { retryButtonClicked = true }
 
     fun onRefreshMatches(): () -> Unit = { matchesRefreshed = true }

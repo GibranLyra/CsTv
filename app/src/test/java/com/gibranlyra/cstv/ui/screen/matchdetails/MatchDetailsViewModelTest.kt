@@ -24,7 +24,6 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 internal class MatchDetailsViewModelTest {
-
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
@@ -39,7 +38,7 @@ internal class MatchDetailsViewModelTest {
             dispatcherProvider = coroutineTestRule.testDispatcherProvider,
             matchId = 0,
             matchDetailsScreenShowMatchUseCase = matchDetailsShowMatchUseCase,
-            matchDetailsScreenTeamUseCase = matchDetailsTeamUseCase
+            matchDetailsScreenTeamUseCase = matchDetailsTeamUseCase,
         )
     }
 
@@ -53,14 +52,16 @@ internal class MatchDetailsViewModelTest {
             val expectedMatchResult = Result.Success(match)
             val expectedTeamsResult = Result.Success(matchDetailsTeamsData)
 
-            val expectedMatchDetailsState = MatchDetailsUiState(
-                matchState = State.Loaded(match),
-                teamsState = State.Loaded(matchDetailsTeamsData)
-            )
+            val expectedMatchDetailsState =
+                MatchDetailsUiState(
+                    matchState = State.Loaded(match),
+                    teamsState = State.Loaded(matchDetailsTeamsData),
+                )
 
-            coEvery { matchDetailsShowMatchUseCase.invoke(match.id) } returns flowOf(
-                expectedMatchResult
-            )
+            coEvery { matchDetailsShowMatchUseCase.invoke(match.id) } returns
+                flowOf(
+                    expectedMatchResult,
+                )
             coEvery {
                 matchDetailsTeamUseCase.invoke(team1.teamId, team2.teamId)
             } returns flowOf(expectedTeamsResult)
@@ -69,7 +70,7 @@ internal class MatchDetailsViewModelTest {
                 Assert.assertEquals(MatchDetailsUiState(), awaitItem())
                 Assert.assertEquals(
                     expectedMatchDetailsState.copy(teamsState = State.Uninitialized()),
-                    awaitItem()
+                    awaitItem(),
                 )
                 Assert.assertEquals(expectedMatchDetailsState, awaitItem())
             }
@@ -84,23 +85,26 @@ internal class MatchDetailsViewModelTest {
             val expectedMatchResult = Result.Success(match)
             val expectedTeamsResult = Result.Error("")
 
-            val expectedMatchDetailsState = MatchDetailsUiState(
-                matchState = State.Loaded(match),
-                teamsState = State.Error(R.string.match_detail_error_team_cannot_be_loaded)
-            )
+            val expectedMatchDetailsState =
+                MatchDetailsUiState(
+                    matchState = State.Loaded(match),
+                    teamsState = State.Error(R.string.match_detail_error_team_cannot_be_loaded),
+                )
 
-            coEvery { matchDetailsShowMatchUseCase.invoke(match.id) } returns flowOf(
-                expectedMatchResult
-            )
-            coEvery { matchDetailsTeamUseCase.invoke(team1.teamId, team2.teamId) } returns flowOf(
-                expectedTeamsResult
-            )
+            coEvery { matchDetailsShowMatchUseCase.invoke(match.id) } returns
+                flowOf(
+                    expectedMatchResult,
+                )
+            coEvery { matchDetailsTeamUseCase.invoke(team1.teamId, team2.teamId) } returns
+                flowOf(
+                    expectedTeamsResult,
+                )
 
             viewModel.uiState.test {
                 Assert.assertEquals(MatchDetailsUiState(), awaitItem())
                 Assert.assertEquals(
                     expectedMatchDetailsState.copy(teamsState = State.Uninitialized()),
-                    awaitItem()
+                    awaitItem(),
                 )
                 Assert.assertEquals(expectedMatchDetailsState, awaitItem())
             }
@@ -115,23 +119,26 @@ internal class MatchDetailsViewModelTest {
             val expectedMatchResult = Result.Error("")
             val expectedTeamsResult = Result.Error("")
 
-            val expectedMatchDetailsState = MatchDetailsUiState(
-                matchState = State.Error(R.string.match_detail_error_match_cannot_be_loaded),
-                teamsState = State.Error(R.string.match_detail_error_team_cannot_be_loaded)
-            )
+            val expectedMatchDetailsState =
+                MatchDetailsUiState(
+                    matchState = State.Error(R.string.match_detail_error_match_cannot_be_loaded),
+                    teamsState = State.Error(R.string.match_detail_error_team_cannot_be_loaded),
+                )
 
-            coEvery { matchDetailsShowMatchUseCase.invoke(match.id) } returns flowOf(
-                expectedMatchResult
-            )
-            coEvery { matchDetailsTeamUseCase.invoke(team1.teamId, team2.teamId) } returns flowOf(
-                expectedTeamsResult
-            )
+            coEvery { matchDetailsShowMatchUseCase.invoke(match.id) } returns
+                flowOf(
+                    expectedMatchResult,
+                )
+            coEvery { matchDetailsTeamUseCase.invoke(team1.teamId, team2.teamId) } returns
+                flowOf(
+                    expectedTeamsResult,
+                )
 
             viewModel.uiState.test {
                 Assert.assertEquals(MatchDetailsUiState(), awaitItem())
                 Assert.assertEquals(
                     expectedMatchDetailsState.copy(teamsState = State.Uninitialized()),
-                    awaitItem()
+                    awaitItem(),
                 )
                 Assert.assertEquals(expectedMatchDetailsState, awaitItem())
             }

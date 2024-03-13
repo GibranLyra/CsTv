@@ -1,6 +1,5 @@
 package com.gibranlyra.cstv.data.entity
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -31,5 +30,5 @@ data class Game(
     @SerialName("winner")
     val winner: Winner = Winner(),
     @SerialName("winner_type")
-    val winnerType: String = ""
+    val winnerType: String = "",
 )

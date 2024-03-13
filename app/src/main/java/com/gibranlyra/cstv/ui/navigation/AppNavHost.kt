@@ -21,16 +21,16 @@ internal fun AppNavHost(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = startDestination
+        startDestination = startDestination,
     ) {
         homeScreenComposable(
             navController = navController,
-            onToolbarComposition = onToolbarComposition
+            onToolbarComposition = onToolbarComposition,
         )
 
         matchDetailsScreenComposable(
             context = context,
-            onToolbarComposition = onToolbarComposition
+            onToolbarComposition = onToolbarComposition,
         )
     }
 }

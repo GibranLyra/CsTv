@@ -20,10 +20,9 @@ import org.robolectric.annotation.Config
 @RunWith(RobolectricTestRunner::class)
 @Config(
     instrumentedPackages = ["androidx.loader.content"],
-    qualifiers = "xlarge"
+    qualifiers = "xlarge",
 )
 internal class HomeScreenKtTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -48,7 +47,6 @@ internal class HomeScreenKtTest {
 
         arrange {
             setContent(uiState = homeScreenData.getLoadedState(matches))
-
         }
         assert {
             tagIsDisplayed("$MATCH_TEST_TAG ${matches.first().id}")

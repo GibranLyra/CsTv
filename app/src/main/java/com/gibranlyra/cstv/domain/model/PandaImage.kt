@@ -8,18 +8,22 @@ private const val THUMBNAIL_IMAGE_TYPE = "thumb_"
 
 @Parcelize
 data class PandaImage(private val imageUrl: String = "") : Parcelable {
+    fun getImage(imageType: ImageType): String =
+        when {
+            imageUrl.isNotEmpty() ->
+                when (imageType) {
+                    ImageType.DEFAULT -> imageUrl
+                    ImageType.NORMAL -> appendImageType(imageUrl, NORMAL_IMAGE_TYPE)
+                    ImageType.THUMBNAIL -> appendImageType(imageUrl, THUMBNAIL_IMAGE_TYPE)
+                }
 
-    fun getImage(imageType: ImageType): String = when {
-        imageUrl.isNotEmpty() -> when (imageType) {
-            ImageType.DEFAULT -> imageUrl
-            ImageType.NORMAL -> appendImageType(imageUrl, NORMAL_IMAGE_TYPE)
-            ImageType.THUMBNAIL -> appendImageType(imageUrl, THUMBNAIL_IMAGE_TYPE)
+            else -> imageUrl
         }
 
-        else -> imageUrl
-    }
-
-    private fun appendImageType(imageUrl: String, imageTypeValue: String): String {
+    private fun appendImageType(
+        imageUrl: String,
+        imageTypeValue: String,
+    ): String {
         val lastSlashIndex = imageUrl.lastIndexOf('/')
         return if (lastSlashIndex != -1) {
             val originalValue = imageUrl.substring(lastSlashIndex + 1)
@@ -32,6 +36,6 @@ data class PandaImage(private val imageUrl: String = "") : Parcelable {
     enum class ImageType {
         DEFAULT,
         NORMAL,
-        THUMBNAIL
+        THUMBNAIL,
     }
 }

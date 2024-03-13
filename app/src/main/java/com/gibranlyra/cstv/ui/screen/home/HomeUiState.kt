@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flowOf
 internal data class HomeUiState(
     val matchesPagingState: Flow<PagingData<MatchData>> = flowOf(),
     val navigateToMatchDetailScreen: HomeEvents.NavigateToMatchDetailsScreen? = null,
-    val isMatchRefreshing: HomeEvents.IsMatchRefreshing = HomeEvents.IsMatchRefreshing()
+    val isMatchRefreshing: HomeEvents.IsMatchRefreshing = HomeEvents.IsMatchRefreshing(),
 )
 
 internal sealed interface HomeEvents {

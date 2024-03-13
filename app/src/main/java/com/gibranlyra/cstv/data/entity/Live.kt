@@ -1,6 +1,5 @@
 package com.gibranlyra.cstv.data.entity
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,5 +10,5 @@ data class Live(
     @SerialName("supported")
     val supported: Boolean = false,
     @SerialName("url")
-    val url: String? = null
+    val url: String? = null,
 )

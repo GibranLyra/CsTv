@@ -20,7 +20,6 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 internal class MatchPagingSourceTest {
-
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
@@ -40,42 +39,44 @@ internal class MatchPagingSourceTest {
     }
 
     @Test
-    fun `when pagingSourceLoad should return error`() = runTest {
-        val error = RuntimeException("Unexpected Error", Throwable())
-        val pageSize = 20
-        val pageNumber = 20
-        val filter = "filter"
+    fun `when pagingSourceLoad should return error`() =
+        runTest {
+            val error = RuntimeException("Unexpected Error", Throwable())
+            val pageSize = 20
+            val pageNumber = 20
+            val filter = "filter"
 
-        coEvery { matchDataSource.getMatches(pageSize, pageNumber, filter) } throws error
-        coEvery { getCurrentDateTime(0) } returns filter
+            coEvery { matchDataSource.getMatches(pageSize, pageNumber, filter) } throws error
+            coEvery { getCurrentDateTime(0) } returns filter
 
-        val expectedResult = PagingSource.LoadResult.Error<Int, MatchData>(error)
+            val expectedResult = PagingSource.LoadResult.Error<Int, MatchData>(error)
 
-        assertEquals(
-            expectedResult,
-            matchPagingSource.load(PagingSource.LoadParams.Refresh(pageSize, pageNumber, false))
-        )
-    }
+            assertEquals(
+                expectedResult,
+                matchPagingSource.load(PagingSource.LoadParams.Refresh(pageSize, pageNumber, false)),
+            )
+        }
 
     @Test
-    fun `when pagingSource loaded successfully then should return results`() = runTest {
-        val pageSize = 20
-        val pageNumber = 0
-        val filter = "filter"
-        val response = MatchListStub()
+    fun `when pagingSource loaded successfully then should return results`() =
+        runTest {
+            val pageSize = 20
+            val pageNumber = 0
+            val filter = "filter"
+            val response = MatchListStub()
 
-        coEvery { matchDataSource.getMatches(pageNumber, pageNumber, filter) } returns response
-        coEvery { matchDataSource.getMatches(pageSize, pageNumber, filter) } returns response
-        coEvery { getCurrentDateTime(0) } returns filter
+            coEvery { matchDataSource.getMatches(pageNumber, pageNumber, filter) } returns response
+            coEvery { matchDataSource.getMatches(pageSize, pageNumber, filter) } returns response
+            coEvery { getCurrentDateTime(0) } returns filter
 
-        val expectedResult =
-            PagingSource.LoadResult.Page(response.map { it.toMatchData() }, null, 1)
+            val expectedResult =
+                PagingSource.LoadResult.Page(response.map { it.toMatchData() }, null, 1)
 
-        assertEquals(
-            expectedResult,
-            matchPagingSource.load(PagingSource.LoadParams.Refresh(0, 1, false))
-        )
-    }
+            assertEquals(
+                expectedResult,
+                matchPagingSource.load(PagingSource.LoadParams.Refresh(0, 1, false)),
+            )
+        }
 
     @Test
     fun `when pagingSource append then should request nextPage values and returns success`() =
@@ -92,7 +93,8 @@ internal class MatchPagingSourceTest {
                 PagingSource.LoadResult.Page(response.map { it.toMatchData() }, null, 2)
 
             assertEquals(
-                expectedResult, matchPagingSource.load(PagingSource.LoadParams.Append(1, 1, false))
+                expectedResult,
+                matchPagingSource.load(PagingSource.LoadParams.Append(1, 1, false)),
             )
         }
 }

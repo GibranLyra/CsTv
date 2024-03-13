@@ -6,7 +6,8 @@ import com.gibranlyra.cstv.domain.model.MatchData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-internal class MatchDetailsScreenShowMatchUseCase @Inject constructor(private val matchRepository: MatchRepository) {
-
-    operator fun invoke(matchId: Int): Flow<Result<MatchData>> = matchRepository.getMatch(matchId)
-}
+internal class MatchDetailsScreenShowMatchUseCase
+    @Inject
+    constructor(private val matchRepository: MatchRepository) {
+        operator fun invoke(matchId: Int): Flow<Result<MatchData>> = matchRepository.getMatch(matchId)
+    }

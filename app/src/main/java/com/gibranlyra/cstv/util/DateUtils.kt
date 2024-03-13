@@ -13,7 +13,6 @@ fun convertToLocalDateTime(utcString: String): String {
 
     val currentBrazilTime = ZonedDateTime.now(deviceTimeZone)
 
-
     val longDateFormat =
         DateTimeFormatter.ofPattern("dd.MM.YYYY, HH:mm").let { deviceDateTime.format(it) }
     val smallDateFormat = DateTimeFormatter.ofPattern("HH:mm").let { deviceDateTime.format(it) }
@@ -26,7 +25,7 @@ fun convertToLocalDateTime(utcString: String): String {
 
 private fun isToday(
     currentBrazilTime: ZonedDateTime,
-    brazilDateTime: ZonedDateTime
+    brazilDateTime: ZonedDateTime,
 ) = currentBrazilTime.dayOfYear == brazilDateTime.dayOfYear
 
 fun getCurrentDateTime(plusDays: Long = 0): String {

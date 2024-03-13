@@ -10,5 +10,5 @@ enum class MatchStatus {
     FINISHED,
 
     @SerialName("not_started")
-    NOT_STARTED
+    NOT_STARTED,
 }

@@ -11,7 +11,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 internal class DispatchProviderModule {
-
     @Provides
     @Singleton
     fun provideDefaultDispatcherProvider(): DispatcherProvider = DefaultDispatcherProvider()

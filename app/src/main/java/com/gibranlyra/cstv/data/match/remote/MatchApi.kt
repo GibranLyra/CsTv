@@ -5,7 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 internal interface MatchApi {
-
     @GET("/csgo/matches")
     suspend fun getMatches(
         @Query("page[size]") pageSize: Int,

@@ -47,30 +47,30 @@ internal fun HomeScreen(
 ) {
     onToolbarComposition(ToolbarData(stringResource(id = R.string.home_screen_title)))
 
-    val pullRefreshState = rememberPullRefreshState(
-        refreshing = uiState.isMatchRefreshing.isRefreshing,
-        onRefresh = { onRefreshMatches() }
-    )
+    val pullRefreshState =
+        rememberPullRefreshState(
+            refreshing = uiState.isMatchRefreshing.isRefreshing,
+            onRefresh = { onRefreshMatches() },
+        )
 
     Box(
         Modifier
             .testTag(REFRESH_MATCHES_TEST_TAG)
-            .pullRefresh(pullRefreshState)
+            .pullRefresh(pullRefreshState),
     ) {
         MatchesList(
             uiState = uiState,
             modifier = modifier,
             onMatchClicked = onMatchClicked,
-            onRetryButtonClicked = onRetryButtonClicked
+            onRetryButtonClicked = onRetryButtonClicked,
         )
 
         PullRefreshIndicator(
             uiState.isMatchRefreshing.isRefreshing,
             pullRefreshState,
-            Modifier.align(Alignment.TopCenter)
+            Modifier.align(Alignment.TopCenter),
         )
     }
-
 }
 
 @Composable
@@ -83,9 +83,10 @@ private fun MatchesList(
     val matches = uiState.matchesPagingState.collectAsLazyPagingItems()
 
     LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = dimensionResource(R.dimen.padding_large)),
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(horizontal = dimensionResource(R.dimen.padding_large)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_large)),
         contentPadding = PaddingValues(vertical = dimensionResource(R.dimen.padding_large)),
     ) {
@@ -97,25 +98,25 @@ private fun MatchesList(
                 MatchItem(
                     modifier = Modifier.testTag("$MATCH_TEST_TAG ${match.id}"),
                     match = match,
-                    onClick = onMatchClicked
+                    onClick = onMatchClicked,
                 )
             }
         }
 
         matchListItemHandler(
             loadState = matches.loadState.refresh,
-            onRetryButtonClicked = onRetryButtonClicked
+            onRetryButtonClicked = onRetryButtonClicked,
         )
         matchListItemHandler(
             loadState = matches.loadState.append,
-            onRetryButtonClicked = onRetryButtonClicked
+            onRetryButtonClicked = onRetryButtonClicked,
         )
     }
 }
 
 private fun LazyListScope.matchListItemHandler(
     loadState: LoadState,
-    onRetryButtonClicked: () -> Unit
+    onRetryButtonClicked: () -> Unit,
 ) {
     when (loadState) {
         is LoadState.Error -> item { HomeErrorView(onRetryButtonClicked = onRetryButtonClicked) }
@@ -129,17 +130,20 @@ private fun HomeLoadingView(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         CsTvCircularLoading()
     }
 }
 
 @Composable
-fun HomeErrorView(modifier: Modifier = Modifier, onRetryButtonClicked: () -> Unit) {
+fun HomeErrorView(
+    modifier: Modifier = Modifier,
+    onRetryButtonClicked: () -> Unit,
+) {
     Column(modifier = modifier) {
         RetryButton<Nothing>(
-            message = stringResource(id = R.string.home_screen_error)
+            message = stringResource(id = R.string.home_screen_error),
         ) { onRetryButtonClicked.invoke() }
     }
 }
@@ -148,13 +152,16 @@ fun HomeErrorView(modifier: Modifier = Modifier, onRetryButtonClicked: () -> Uni
 @Composable
 internal fun HomePreview() {
     CsTvTheme {
-        val successPagingData = PagingData.from(
-            data = stubMatches(), sourceLoadStates = LoadStates(
-                refresh = LoadState.NotLoading(true),
-                append = LoadState.NotLoading(true),
-                prepend = LoadState.NotLoading(true),
+        val successPagingData =
+            PagingData.from(
+                data = stubMatches(),
+                sourceLoadStates =
+                    LoadStates(
+                        refresh = LoadState.NotLoading(true),
+                        append = LoadState.NotLoading(true),
+                        prepend = LoadState.NotLoading(true),
+                    ),
             )
-        )
         HomeScreen(
             HomeUiState(flowOf(successPagingData)),
         )
@@ -173,15 +180,18 @@ internal fun HomeLoadingPreview() {
 @Composable
 internal fun HomeErrorPreview() {
     CsTvTheme {
-        val errorPagingData = PagingData.from(
-            data = listOf<MatchData>(), sourceLoadStates = LoadStates(
-                refresh = LoadState.Error(IOException("Error")),
-                append = LoadState.NotLoading(true),
-                prepend = LoadState.NotLoading(true),
+        val errorPagingData =
+            PagingData.from(
+                data = listOf<MatchData>(),
+                sourceLoadStates =
+                    LoadStates(
+                        refresh = LoadState.Error(IOException("Error")),
+                        append = LoadState.NotLoading(true),
+                        prepend = LoadState.NotLoading(true),
+                    ),
             )
-        )
         HomeScreen(
-            HomeUiState(flowOf(errorPagingData))
+            HomeUiState(flowOf(errorPagingData)),
         )
     }
 }

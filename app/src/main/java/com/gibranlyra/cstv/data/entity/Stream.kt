@@ -1,6 +1,5 @@
 package com.gibranlyra.cstv.data.entity
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,5 +14,5 @@ data class Stream(
     @SerialName("official")
     val official: Boolean = false,
     @SerialName("raw_url")
-    val rawUrl: String = ""
+    val rawUrl: String = "",
 )

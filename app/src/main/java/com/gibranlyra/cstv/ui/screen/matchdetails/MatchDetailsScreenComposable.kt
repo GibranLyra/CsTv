@@ -26,7 +26,6 @@ internal fun NavGraphBuilder.matchDetailsScreenComposable(
     popEnterTransition: AnimatedContentTransitionScope<*>.() -> EnterTransition = { slideIntoTransition() },
     popExitTransition: AnimatedContentTransitionScope<*>.() -> ExitTransition = { slideOutOfContainerTransition() },
 ) {
-
     composable(
         route = Screen.MatchDetails.routeWithArgs,
         arguments = Screen.MatchDetails.arguments,
@@ -37,12 +36,14 @@ internal fun NavGraphBuilder.matchDetailsScreenComposable(
     ) { backStackEntry ->
         val matchId = backStackEntry.arguments?.getInt(Screen.MatchDetails.matchIdArg) ?: -1
 
-        val viewModelFactory = (context as Activity).viewModelFactoryProvider()
-            .characterDetailViewModelFactory()
+        val viewModelFactory =
+            (context as Activity).viewModelFactoryProvider()
+                .characterDetailViewModelFactory()
 
-        val matchDetailsViewModel = viewModel<MatchDetailsViewModel>(
-            factory = MatchDetailsViewModel.provideFactory(viewModelFactory, matchId)
-        )
+        val matchDetailsViewModel =
+            viewModel<MatchDetailsViewModel>(
+                factory = MatchDetailsViewModel.provideFactory(viewModelFactory, matchId),
+            )
 
         val uiState by matchDetailsViewModel.uiState.collectAsState()
 

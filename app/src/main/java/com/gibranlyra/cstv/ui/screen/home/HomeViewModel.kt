@@ -16,42 +16,48 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-internal class HomeViewModel @Inject constructor(
-    private val homeUseCase: HomeUseCase,
-    private val dispatcher: DispatcherProvider
-) : ViewModel() {
+internal class HomeViewModel
+    @Inject
+    constructor(
+        private val homeUseCase: HomeUseCase,
+        private val dispatcher: DispatcherProvider,
+    ) : ViewModel() {
+        private val _uiState = MutableStateFlow(HomeUiState())
+        val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+        init {
+            getMatches()
+        }
 
-    init {
-        getMatches()
-    }
+        fun getMatches() {
+            val matchesState = homeUseCase().cachedIn(viewModelScope)
+            updateMatchesPagingDataState(matchesState)
+        }
 
-    fun getMatches() {
-        val matchesState = homeUseCase().cachedIn(viewModelScope)
-        updateMatchesPagingDataState(matchesState)
-    }
+        private fun updateMatchesPagingDataState(matchesState: Flow<PagingData<MatchData>>) {
+            _uiState.update { currentState -> currentState.copy(matchesPagingState = matchesState) }
+        }
 
-    private fun updateMatchesPagingDataState(matchesState: Flow<PagingData<MatchData>>) {
-        _uiState.update { currentState -> currentState.copy(matchesPagingState = matchesState) }
-    }
-
-    fun navigateToMatchDetailsScreen(matchId: Int, team1Id: Int, team2Id: Int) {
-        _uiState.update { currentState ->
-            currentState.copy(
-                navigateToMatchDetailScreen = HomeEvents.NavigateToMatchDetailsScreen(
-                    matchId,
-                    team1Id,
-                    team2Id
+        fun navigateToMatchDetailsScreen(
+            matchId: Int,
+            team1Id: Int,
+            team2Id: Int,
+        ) {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    navigateToMatchDetailScreen =
+                        HomeEvents.NavigateToMatchDetailsScreen(
+                            matchId,
+                            team1Id,
+                            team2Id,
+                        ),
                 )
-            )
+            }
         }
-    }
 
-    fun navigatedMatchDetailsScreen() {
-        _uiState.update { currentState ->
-            currentState.copy(navigateToMatchDetailScreen = null)
+        fun navigatedMatchDetailsScreen() {
+            _uiState.update { currentState ->
+                currentState.copy(navigateToMatchDetailScreen = null)
+            }
         }
     }
-}

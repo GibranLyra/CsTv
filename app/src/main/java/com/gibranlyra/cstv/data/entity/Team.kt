@@ -1,6 +1,5 @@
 package com.gibranlyra.cstv.data.entity
 
-
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,5 +20,5 @@ data class Team(
     @SerialName("slug")
     val slug: String = "",
     @SerialName("players")
-    val players: List<Player>? = listOf()
+    val players: List<Player>? = listOf(),
 )

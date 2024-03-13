@@ -24,23 +24,21 @@ annotation class BaseUrl
 @Module
 @InstallIn(SingletonComponent::class)
 internal object NetworkModule {
-
     @BaseUrl
     @Provides
     fun provideBaseUrl(): String = "https://api.pandascore.co/"
 
     @Provides
     @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-        //The log level would be dependent of the build type. In Release build, it would be NONE
-        level = HttpLoggingInterceptor.Level.BASIC
-    }
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor().apply {
+            // The log level would be dependent of the build type. In Release build, it would be NONE
+            level = HttpLoggingInterceptor.Level.BASIC
+        }
 
     @Provides
     @Singleton
-    fun provideHttpClient(
-        httpLoggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient {
+    fun provideHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val timeout = 60L
 
         return OkHttpClient.Builder()
@@ -50,10 +48,11 @@ internal object NetworkModule {
             .writeTimeout(timeout, TimeUnit.SECONDS)
             .addInterceptor { chain -> addDefaultParameters(chain) }
             .addInterceptor { chain ->
-                val request: Request = chain.request()
-                    .newBuilder()
-                    .addHeader("accept", "application/json")
-                    .build()
+                val request: Request =
+                    chain.request()
+                        .newBuilder()
+                        .addHeader("accept", "application/json")
+                        .build()
                 chain.proceed(request)
             }
             .build()
@@ -61,12 +60,16 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(@BaseUrl baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(
+        @BaseUrl baseUrl: String,
+        okHttpClient: OkHttpClient,
+    ): Retrofit {
         val contentType = "application/json".toMediaType()
-        val json = Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        }
+        val json =
+            Json {
+                ignoreUnknownKeys = true
+                isLenient = true
+            }
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)

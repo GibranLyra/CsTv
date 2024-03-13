@@ -9,5 +9,5 @@ fun Player.toPlayerData(): PlayerData =
         playerId = id,
         nickName = name,
         name = "${firstName.orEmpty()} ${lastName.orEmpty()}",
-        playerImage = PandaImage(imageUrl.orEmpty())
+        playerImage = PandaImage(imageUrl.orEmpty()),
     )

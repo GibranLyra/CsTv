@@ -8,23 +8,23 @@ private const val ANIMATION_DURATION = 400
 internal fun AnimatedContentTransitionScope<*>.slideInEnterTransition() =
     slideIntoContainer(
         towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-        animationSpec = tween(ANIMATION_DURATION)
+        animationSpec = tween(ANIMATION_DURATION),
     )
 
 internal fun AnimatedContentTransitionScope<*>.slideOutEnterTransition() =
     slideOutOfContainer(
         towards = AnimatedContentTransitionScope.SlideDirection.Companion.Left,
-        animationSpec = tween(ANIMATION_DURATION)
+        animationSpec = tween(ANIMATION_DURATION),
     )
 
 internal fun AnimatedContentTransitionScope<*>.slideIntoTransition() =
     slideIntoContainer(
         towards = AnimatedContentTransitionScope.SlideDirection.Right,
-        animationSpec = tween(ANIMATION_DURATION)
+        animationSpec = tween(ANIMATION_DURATION),
     )
 
 internal fun AnimatedContentTransitionScope<*>.slideOutOfContainerTransition() =
     slideOutOfContainer(
         towards = AnimatedContentTransitionScope.SlideDirection.Companion.Right,
-        animationSpec = tween(ANIMATION_DURATION)
+        animationSpec = tween(ANIMATION_DURATION),
     )
