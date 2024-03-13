@@ -42,8 +42,8 @@ internal class MatchPagingSourceTest {
     @Test
     fun `when pagingSourceLoad should return error`() = runTest {
         val error = RuntimeException("Unexpected Error", Throwable())
-        val pageSize = 50
-        val pageNumber = 50
+        val pageSize = 20
+        val pageNumber = 20
         val filter = "filter"
 
         coEvery { matchDataSource.getMatches(pageSize, pageNumber, filter) } throws error
@@ -59,11 +59,12 @@ internal class MatchPagingSourceTest {
 
     @Test
     fun `when pagingSource loaded successfully then should return results`() = runTest {
-        val pageSize = 50
+        val pageSize = 20
         val pageNumber = 0
         val filter = "filter"
         val response = MatchListStub()
 
+        coEvery { matchDataSource.getMatches(pageNumber, pageNumber, filter) } returns response
         coEvery { matchDataSource.getMatches(pageSize, pageNumber, filter) } returns response
         coEvery { getCurrentDateTime(0) } returns filter
 
@@ -79,7 +80,7 @@ internal class MatchPagingSourceTest {
     @Test
     fun `when pagingSource append then should request nextPage values and returns success`() =
         runTest {
-            val pageSize = 50
+            val pageSize = 20
             val pageNumber = 1
             val filter = "filter"
             val response = MatchListStub()
